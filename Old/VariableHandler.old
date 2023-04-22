@@ -1,0 +1,159 @@
+namespace Bedrock
+{
+    public class VariableHandler
+    {
+        Dictionary<string, object> localVariables = new Dictionary<string, object>();
+        public static Dictionary<string, BedrockStructBluePrint> Structures = new Dictionary<string, BedrockStructBluePrint>();
+
+        public static Dictionary<string, VarTypes> varTypes = new Dictionary<string, VarTypes>(){
+            {"bool",VarTypes.Bool},
+            {"decimal",VarTypes.Decimal},
+            {"float",VarTypes.Float},
+            {"int",VarTypes.Int},
+            {"num",VarTypes.Num},
+            {"string",VarTypes.String},
+        };
+        
+        public void Add(string func,string name,object value)
+        {
+            localVariables.Add($"{func}:{name}",value);
+        }
+
+    }
+
+    public class BedrockStructBluePrint
+    {
+        public Dictionary<VarTypes, string> elements = new Dictionary<VarTypes, string>();
+
+        public static BedrockStructBluePrint ParseDefinition(string val)
+        {
+            BedrockStructBluePrint bsbp = new BedrockStructBluePrint();
+            string s = Tokenizer.DeBrack('{', '}', val);
+            string[] split = Tokenizer.Split(s, ';');
+            for (int i = 0; i < split.Length; i++)
+            {
+                string[] elems_ = Tokenizer.Split(split[i], ' ');
+                if (elems_.Length == 2)
+                {
+                    bsbp.elements.Add(VariableHandler.varTypes[elems_[0]], elems_[1]);
+                }
+            }
+            return bsbp;
+        }
+    }
+
+    public class BedrockStruct
+    {
+        public BedrockStructBluePrint BluePrint { get; set; }
+        Dictionary<string, object> elementValues = new Dictionary<string, object>();
+    }
+}
+
+/*
+ 
+        public static Dictionary<string, VarTypes> varTypes = new Dictionary<string, VarTypes>(){
+            {"bool",VarTypes.Bool},
+            {"decimal",VarTypes.Decimal},
+            {"float",VarTypes.Float},
+            {"int",VarTypes.Int},
+            {"num",VarTypes.Num},
+            {"string",VarTypes.String},
+        };
+ 
+ */
+
+
+/*
+ 
+        public object ParseConstant(string value)
+        {
+            if (value[0] == '\"' && value[value.Length - 1] == '\"')
+            {
+                return value.Substring(1, value.Length - 2);
+            }
+            else if (value.Contains('.'))
+            {
+                if (value[value.Length - 1] == HelperSymbols.FLOAT_VALUE_ENDSWITH)
+                {
+                    return float.Parse(value.Substring(0, value.Length - 1));
+                }
+                else if (value[value.Length - 1] == HelperSymbols.DECIMAL_VALUE_ENDSWITH)
+                {
+                    return decimal.Parse(value.Substring(0, value.Length - 1));
+                }
+                else
+                {
+                    return double.Parse(value);
+                }
+            }
+            else
+            {
+                if (value[value.Length - 1] == HelperSymbols.BYTE_VALUE_ENDSWITH)
+                {
+                    return byte.Parse(value.Substring(0, value.Length - 1));
+                }
+                else if (value[value.Length - 1] == HelperSymbols.LONG_VALUE_ENDSWITH)
+                {
+                    return long.Parse(value.Substring(0, value.Length - 1));
+                }
+                else if (value[value.Length - 1] == HelperSymbols.SHORT_VALUE_ENDSWITH)
+                {
+                    return short.Parse(value.Substring(0, value.Length - 1));
+                }
+                else
+                {
+                    return int.Parse(value);
+                }
+            }
+        }
+ 
+ */
+
+/*
+         public object[] ParseArray(string value)
+        {
+            string[] buff = Tokenizer.Split(value.Substring(1, value.Length - 2), ',');
+            object[] ret = new object[buff.Length];
+
+            for (int i = 0; i < buff.Length; i++)
+            {
+                ret[i] = Get(buff[i]);
+            }
+            return ret;
+        }
+ 
+ */
+
+
+/*
+ 
+        static int[] ToIntArray(object[] array)
+        {
+            int[] ret = new int[array.Length];
+            for (int i = 0; i < array.Length; i++)
+            {
+                ret[i] = (int)array[i];
+            }
+            return ret;
+        }
+        static string[] ToStringArray(object[] array)
+        {
+            string[] ret = new string[array.Length];
+            for (int i = 0; i < array.Length; i++)
+            {
+                ret[i] = (string)array[i];
+            }
+            return ret;
+        }
+        static Number[] ToNumberArray(object[] array)
+        {
+            Number[] ret = new Number[array.Length];
+            for (int i = 0; i < array.Length; i++)
+            {
+                ret[i] = (Number)array[i];
+            }
+            return ret;
+        }
+
+ 
+ */

@@ -1,0 +1,817 @@
+namespace Bedrock.Lang
+{
+    public class Maths
+    {
+        public delegate Number MathOpp(Number a, Number b);
+        public delegate Number MathFxnSingle(Number num);
+        public const string PLUS = "+", MINUS = "-", MULTIPLY = "*", DIVIDE = "/", MOD = "%";
+        
+        public static Dictionary<string, MathOpp> MathOperation = new Dictionary<string, MathOpp>(){
+            {PLUS,_ADD},
+            {MINUS,_SUB},
+            {MULTIPLY,_MLT},
+            {DIVIDE,_DIV},
+            {MOD,_MOD},
+        };
+        public static Dictionary<string, MathFxnSingle> MathFunction = new Dictionary<string, MathFxnSingle>()
+        {
+            {"sin",sin },
+            {"cos",cos },
+            {"tan",tan },
+            {"asin",asin },
+            {"acos",acos },
+            {"atan",atan },
+            {"log",log },
+            {"log10",log10 },
+            {"log2",log2 },
+            {"round",round },
+            {"sqrt",sqrt },
+            {"sinh",sinh },
+            {"cosh",cosh },
+            {"tanh",tanh },
+            {"asinh",asinh },
+            {"acosh",acosh },
+            {"atanh",atanh },
+            {"ceil",ceiling },
+            {"exp",exp },
+            {"floor",floor },
+            {"sign",sign },
+        };
+
+        public const double E = 2.7182818284590451;
+        public const double PI = 3.1415926535897931;
+        public const double Tau = 6.2831853071795862;
+
+        static Number _ADD(Number a, Number b)
+        {
+            return a + b;
+        }
+        static Number _SUB(Number a, Number b)
+        {
+            return a - b;
+        }
+        static Number _MLT(Number a, Number b)
+        {
+            return a * b;
+        }
+        static Number _DIV(Number a, Number b)
+        {
+            return a / b;
+        }
+        static Number _MOD(Number a, Number b)
+        {
+            return a % b;
+        }
+
+        public static Number abs(Number n)
+        {
+            if (n < 0)
+            {
+                Math.Abs(n);
+                return n * -1;
+            }
+            else
+            {
+                return n;
+            }
+        }
+        public static Number sin(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Sin(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Sin(_a);
+            }
+            else if (n.type == typeof(long))
+            {
+                long _a = (long)n;
+                res.value = Math.Sin(_a);
+            }
+            else if (n.type == typeof(int))
+            {
+                int _a = (int)n;
+                res.value = Math.Sin(_a);
+            }
+            else if (n.type == typeof(short))
+            {
+                short _a = (short)n;
+                res.value = Math.Sin(_a);
+            }
+            else if (n.type == typeof(byte))
+            {
+                byte _a = (byte)n;
+                res.value = Math.Sin(_a);
+            }
+            return res;
+
+        }
+        public static Number cos(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Cos(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Cos(_a);
+            }
+            else if (n.type == typeof(long))
+            {
+                long _a = (long)n;
+                res.value = Math.Cos(_a);
+            }
+            else if (n.type == typeof(int))
+            {
+                int _a = (int)n;
+                res.value = Math.Cos(_a);
+            }
+            else if (n.type == typeof(short))
+            {
+                short _a = (short)n;
+                res.value = Math.Cos(_a);
+            }
+            else if (n.type == typeof(byte))
+            {
+                byte _a = (byte)n;
+                res.value = Math.Cos(_a);
+            }
+            return res;
+
+        }
+        public static Number tan(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Tan(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Tan(_a);
+            }
+            else if (n.type == typeof(long))
+            {
+                long _a = (long)n;
+                res.value = Math.Tan(_a);
+            }
+            else if (n.type == typeof(int))
+            {
+                int _a = (int)n;
+                res.value = Math.Tan(_a);
+            }
+            else if (n.type == typeof(short))
+            {
+                short _a = (short)n;
+                res.value = Math.Tan(_a);
+            }
+            else if (n.type == typeof(byte))
+            {
+                byte _a = (byte)n;
+                res.value = Math.Tan(_a);
+            }
+            return res;
+
+        }
+        public static Number asin(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Asin(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Asin(_a);
+            }
+            else if (n.type == typeof(long))
+            {
+                long _a = (long)n;
+                res.value = Math.Asin(_a);
+            }
+            else if (n.type == typeof(int))
+            {
+                int _a = (int)n;
+                res.value = Math.Asin(_a);
+            }
+            else if (n.type == typeof(short))
+            {
+                short _a = (short)n;
+                res.value = Math.Asin(_a);
+            }
+            else if (n.type == typeof(byte))
+            {
+                byte _a = (byte)n;
+                res.value = Math.Asin(_a);
+            }
+            return res;
+
+        }
+        public static Number acos(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Acos(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Acos(_a);
+            }
+            else if (n.type == typeof(long))
+            {
+                long _a = (long)n;
+                res.value = Math.Acos(_a);
+            }
+            else if (n.type == typeof(int))
+            {
+                int _a = (int)n;
+                res.value = Math.Acos(_a);
+            }
+            else if (n.type == typeof(short))
+            {
+                short _a = (short)n;
+                res.value = Math.Acos(_a);
+            }
+            else if (n.type == typeof(byte))
+            {
+                byte _a = (byte)n;
+                res.value = Math.Acos(_a);
+            }
+            return res;
+
+        }
+        public static Number atan(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Atan(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Atan(_a);
+            }
+            else if (n.type == typeof(long))
+            {
+                long _a = (long)n;
+                res.value = Math.Atan(_a);
+            }
+            else if (n.type == typeof(int))
+            {
+                int _a = (int)n;
+                res.value = Math.Atan(_a);
+            }
+            else if (n.type == typeof(short))
+            {
+                short _a = (short)n;
+                res.value = Math.Atan(_a);
+            }
+            else if (n.type == typeof(byte))
+            {
+                byte _a = (byte)n;
+                res.value = Math.Atan(_a);
+            }
+            return res;
+
+        }
+        public static Number log10(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Log10(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Log10(_a);
+            }
+            else if (n.type == typeof(long))
+            {
+                long _a = (long)n;
+                res.value = Math.Log10(_a);
+            }
+            else if (n.type == typeof(int))
+            {
+                int _a = (int)n;
+                res.value = Math.Log10(_a);
+            }
+            else if (n.type == typeof(short))
+            {
+                short _a = (short)n;
+                res.value = Math.Log10(_a);
+            }
+            else if (n.type == typeof(byte))
+            {
+                byte _a = (byte)n;
+                res.value = Math.Log10(_a);
+            }
+            return res;
+
+        }
+        public static Number log(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Log(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Log(_a);
+            }
+            else if (n.type == typeof(long))
+            {
+                long _a = (long)n;
+                res.value = Math.Log(_a);
+            }
+            else if (n.type == typeof(int))
+            {
+                int _a = (int)n;
+                res.value = Math.Log(_a);
+            }
+            else if (n.type == typeof(short))
+            {
+                short _a = (short)n;
+                res.value = Math.Log(_a);
+            }
+            else if (n.type == typeof(byte))
+            {
+                byte _a = (byte)n;
+                res.value = Math.Log(_a);
+            }
+            return res;
+
+        }
+        public static Number log2(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Log2(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Log2(_a);
+            }
+            else if (n.type == typeof(long))
+            {
+                long _a = (long)n;
+                res.value = Math.Log2(_a);
+            }
+            else if (n.type == typeof(int))
+            {
+                int _a = (int)n;
+                res.value = Math.Log2(_a);
+            }
+            else if (n.type == typeof(short))
+            {
+                short _a = (short)n;
+                res.value = Math.Log2(_a);
+            }
+            else if (n.type == typeof(byte))
+            {
+                byte _a = (byte)n;
+                res.value = Math.Log2(_a);
+            }
+            return res;
+
+        }
+        public static Number round(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Round(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Round(_a);
+            }
+            return res;
+
+        }
+        public static Number sqrt(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Sqrt(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Sqrt(_a);
+            }
+            else if (n.type == typeof(long))
+            {
+                long _a = (long)n;
+                res.value = Math.Sqrt(_a);
+            }
+            else if (n.type == typeof(int))
+            {
+                int _a = (int)n;
+                res.value = Math.Sqrt(_a);
+            }
+            else if (n.type == typeof(short))
+            {
+                short _a = (short)n;
+                res.value = Math.Sqrt(_a);
+            }
+            else if (n.type == typeof(byte))
+            {
+                byte _a = (byte)n;
+                res.value = Math.Sqrt(_a);
+            }
+            return res;
+
+        }
+        public static Number sinh(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Sinh(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Sinh(_a);
+            }
+            else if (n.type == typeof(long))
+            {
+                long _a = (long)n;
+                res.value = Math.Sinh(_a);
+            }
+            else if (n.type == typeof(int))
+            {
+                int _a = (int)n;
+                res.value = Math.Sinh(_a);
+            }
+            else if (n.type == typeof(short))
+            {
+                short _a = (short)n;
+                res.value = Math.Sinh(_a);
+            }
+            else if (n.type == typeof(byte))
+            {
+                byte _a = (byte)n;
+                res.value = Math.Sinh(_a);
+            }
+            return res;
+
+        }
+        public static Number cosh(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Cosh(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Cosh(_a);
+            }
+            else if (n.type == typeof(long))
+            {
+                long _a = (long)n;
+                res.value = Math.Cosh(_a);
+            }
+            else if (n.type == typeof(int))
+            {
+                int _a = (int)n;
+                res.value = Math.Cosh(_a);
+            }
+            else if (n.type == typeof(short))
+            {
+                short _a = (short)n;
+                res.value = Math.Cosh(_a);
+            }
+            else if (n.type == typeof(byte))
+            {
+                byte _a = (byte)n;
+                res.value = Math.Cosh(_a);
+            }
+            return res;
+
+        }
+        public static Number tanh(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Tanh(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Tanh(_a);
+            }
+            else if (n.type == typeof(long))
+            {
+                long _a = (long)n;
+                res.value = Math.Tanh(_a);
+            }
+            else if (n.type == typeof(int))
+            {
+                int _a = (int)n;
+                res.value = Math.Tanh(_a);
+            }
+            else if (n.type == typeof(short))
+            {
+                short _a = (short)n;
+                res.value = Math.Tanh(_a);
+            }
+            else if (n.type == typeof(byte))
+            {
+                byte _a = (byte)n;
+                res.value = Math.Tanh(_a);
+            }
+            return res;
+
+        }
+        public static Number asinh(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Asinh(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Asinh(_a);
+            }
+            else if (n.type == typeof(long))
+            {
+                long _a = (long)n;
+                res.value = Math.Asinh(_a);
+            }
+            else if (n.type == typeof(int))
+            {
+                int _a = (int)n;
+                res.value = Math.Asinh(_a);
+            }
+            else if (n.type == typeof(short))
+            {
+                short _a = (short)n;
+                res.value = Math.Asinh(_a);
+            }
+            else if (n.type == typeof(byte))
+            {
+                byte _a = (byte)n;
+                res.value = Math.Asinh(_a);
+            }
+            return res;
+
+        }
+        public static Number acosh(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Acosh(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Acosh(_a);
+            }
+            else if (n.type == typeof(long))
+            {
+                long _a = (long)n;
+                res.value = Math.Acosh(_a);
+            }
+            else if (n.type == typeof(int))
+            {
+                int _a = (int)n;
+                res.value = Math.Acosh(_a);
+            }
+            else if (n.type == typeof(short))
+            {
+                short _a = (short)n;
+                res.value = Math.Acosh(_a);
+            }
+            else if (n.type == typeof(byte))
+            {
+                byte _a = (byte)n;
+                res.value = Math.Acosh(_a);
+            }
+            return res;
+
+        }
+        public static Number atanh(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Atanh(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Atanh(_a);
+            }
+            else if (n.type == typeof(long))
+            {
+                long _a = (long)n;
+                res.value = Math.Atanh(_a);
+            }
+            else if (n.type == typeof(int))
+            {
+                int _a = (int)n;
+                res.value = Math.Atanh(_a);
+            }
+            else if (n.type == typeof(short))
+            {
+                short _a = (short)n;
+                res.value = Math.Atanh(_a);
+            }
+            else if (n.type == typeof(byte))
+            {
+                byte _a = (byte)n;
+                res.value = Math.Atanh(_a);
+            }
+            return res;
+
+        }
+        public static Number ceiling(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Ceiling(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Ceiling(_a);
+            }
+            
+            return res;
+
+        }
+        public static Number exp(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Exp(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Exp(_a);
+            }
+            else if (n.type == typeof(long))
+            {
+                long _a = (long)n;
+                res.value = Math.Exp(_a);
+            }
+            else if (n.type == typeof(int))
+            {
+                int _a = (int)n;
+                res.value = Math.Exp(_a);
+            }
+            else if (n.type == typeof(short))
+            {
+                short _a = (short)n;
+                res.value = Math.Exp(_a);
+            }
+            else if (n.type == typeof(byte))
+            {
+                byte _a = (byte)n;
+                res.value = Math.Exp(_a);
+            }
+            return res;
+
+        }
+        public static Number floor(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Floor(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Floor(_a);
+            }
+            
+            return res;
+
+        }
+        public static Number sign(Number n)
+        {
+            Number res = new Number();
+
+            if (n.type == typeof(double))
+            {
+                double _a = Convert.ToDouble(n.value);
+                res.value = Math.Sign(_a);
+            }
+            else if (n.type == typeof(float))
+            {
+                float _a = (float)n;
+                res.value = Math.Sign(_a);
+            }
+            else if (n.type == typeof(long))
+            {
+                long _a = (long)n;
+                res.value = Math.Sign(_a);
+            }
+            else if (n.type == typeof(int))
+            {
+                int _a = (int)n;
+                res.value = Math.Sign(_a);
+            }
+            else if (n.type == typeof(short))
+            {
+                short _a = (short)n;
+                res.value = Math.Sign(_a);
+            }
+            else if (n.type == typeof(byte))
+            {
+                byte _a = (byte)n;
+                res.value = Math.Sign(_a);
+            }
+            return res;
+
+        }
+
+        public static Number Calculate(List<Number> numbers, List<string> opps)
+        {
+            if (numbers.Count <= opps.Count)
+            {
+                throw new Exception("Invalid calculation!");
+            }
+
+            Number result = numbers[0];
+
+            for (int i = 0; i < opps.Count; i++)
+            {
+                result = MathOperation[opps[0]](result, numbers[i + 1]);
+            }
+
+            return result;
+        }
+    }
+
+}
+

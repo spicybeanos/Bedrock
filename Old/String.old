@@ -1,0 +1,15 @@
+﻿namespace Bedrock.Lang
+{
+    public class String
+    {
+        public static string Concat(List<string> strs)
+        {
+            string res = "";
+            for (int i = 0; i < strs.Count; i++)
+            {
+                res += strs[i];
+            }
+            return res;
+        }
+    }
+}

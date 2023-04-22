@@ -1,0 +1,33 @@
+int c = -23
+int ased = -c +33
+string s = "efsfs"
+
+#comment int char string eofn odsnf ijnweo n s
+
+struct Vect3 {
+    int x
+    int y
+    int z
+}
+ bool s = 3 == 2
+fxn main() {
+    const num x = 5
+    const num example=2
+    num y = 0 #this should be stored in the variableHandler as main:y
+    while ( y <= x )#ewiufbjhdsbfjhsdbf
+    {
+        y = y+1;
+        println("Hello, world!")
+    }
+   
+	
+	#pass by value
+	f(x)
+}
+
+Fxn<int> foo = f
+foo(x)
+
+fxn f(int x){
+	#do something
+}

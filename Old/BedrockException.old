@@ -1,0 +1,87 @@
+using System.Runtime.Serialization;
+
+namespace Bedrock
+{
+    public class BedrockException
+    {
+        public class VariableDoesNotExistException : Exception
+        {
+            private string var_ = "";
+            protected VariableDoesNotExistException()
+            : base()
+            { }
+
+            public VariableDoesNotExistException(string _var) :
+               base(String.Format("{0} does not exist in the current context.", _var))
+            {
+                var_ = _var;
+            }
+
+            public VariableDoesNotExistException(string _var, KnownTypeAttribute line) :
+               base(String.Format("{0} does not exist in the current context. line {1}", _var, line))
+            {
+                var_ = _var;
+            }
+        }
+
+        public class InvalidFunctionException : Exception
+        {
+            private string fxn = "";
+            protected InvalidFunctionException()
+            : base()
+            { }
+
+            public InvalidFunctionException(string fxn_) :
+               base(String.Format("{0} is an invalid function.", fxn_))
+            {
+                fxn = fxn_;
+            }
+
+            public InvalidFunctionException(string fxn_, int line) :
+               base(String.Format("{0} is an invalid function. line {1}", fxn_, line))
+            {
+                fxn = fxn_;
+            }
+        }
+
+        public class ConstantInvalidException : Exception
+        {
+            private string constant = "";
+            protected ConstantInvalidException()
+            : base()
+            { }
+
+            public ConstantInvalidException(string constant_) :
+               base(String.Format("{0} is an invalid constant.", constant_))
+            {
+                constant = constant_;
+            }
+
+            public ConstantInvalidException(string constant_, int line) :
+               base(String.Format("{0} is an invalid constant. line {1}", constant_, line))
+            {
+                constant = constant_;
+            }
+        }
+
+        public class InvalidParametersException : Exception
+        {
+            private string fxn = "";
+            protected InvalidParametersException()
+            : base()
+            { }
+
+            public InvalidParametersException(string fxn_) :
+               base(String.Format("Invalid parameter(s) passed to {0}.", fxn_))
+            {
+                fxn = fxn_;
+            }
+
+            public InvalidParametersException(string fxn_, int line) :
+               base(String.Format("Invalid parameter(s) passed to {0}. line {1}", fxn_, line))
+            {
+                fxn = fxn_;
+            }
+        }
+    }
+}

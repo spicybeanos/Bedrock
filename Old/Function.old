@@ -1,0 +1,13 @@
+
+
+
+
+namespace Bedrock
+{
+    public class Function
+    {
+        public string Name { get; set; }
+        public List<string> Args = new List<string>();
+        public Token[][] functionTokens;
+    }
+}

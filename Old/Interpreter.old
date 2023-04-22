@@ -1,0 +1,115 @@
+namespace Bedrock
+{
+    public class Interpreter
+    {
+
+        /*
+        Only assignment, call, increment, decrement,
+        and new object expressions can be used as a statement 
+        */
+        public VariableHandler variableHandler;
+        public delegate object Statement(Token[] args, VariableHandler var);
+
+
+        public Dictionary<string, Function> Functions = new Dictionary<string, Function>();
+
+        public Interpreter()
+        {
+            variableHandler = new VariableHandler();
+        }
+
+        public void Load(Token[][] tf)
+        {
+            
+        }
+
+        
+
+    }
+
+    public enum VarTypes
+    {
+        String,
+        Int,
+        Float,
+        Bool,
+        Decimal,
+        Num,
+        Struct
+    }
+
+
+    /*
+     * int -> keyword
+     * 0.94 -> constant
+     * x -> variable(field)
+     * load() -> function call
+     * 
+     */
+
+    /*
+     * assignment, call and declearation
+     * expressions can be used as a statement
+     */
+
+    /*
+    num marks[] = {1,2,3,4,5,6}
+    string names[] = {"sdf","dsf","dsfsdf","htrhd","operir","fsdgui"}
+    marks[0] = 3
+    fxn g ():
+
+    end g
+    */
+}
+
+
+/*
+
+
+    public struct Element{
+        public object value;
+        public ElementType type;
+
+        public Element(object value_,ElementType _type)
+        {
+            value = value_;
+            type = _type;
+        }
+    }
+*/
+/*
+ 
+ public Token[][] Digest(TokenizedFile tf)
+        {
+            Token[][] ret = new Token[tf.tokenizedLines.Count][];
+            for (int line = 0; line < tf.tokenizedLines.Count; line++)
+            {
+                Token[] linet = tf.tokenizedLines[line];
+                ret[line] = new Token[linet.Length];
+                for (int i = 0; i < linet.Length; i++)
+                {
+                    if (linet[i].token == TokenIDs.Literal)
+                    {
+                        //ret[line][i] =
+                        //new Token(variableHandler.ParseConstant(linet[i].value.ToString()), TokenIDs.Literal);
+                    }
+                    else if (linet[i].token == TokenIDs.Keyword)
+                    {
+                        ret[line][i] = new Token(keywords[linet[i].value + ""], TokenIDs.Keyword);
+                    }
+                }
+            }
+
+            return ret;
+        }
+ 
+ */
+/*        public static Dictionary<string, Keywords> keywords = new Dictionary<string, Keywords>(){
+            {"var",Keywords.Var}, {"void",Keywords.Void},{"new",Keywords.New},
+            {"del",Keywords.Del},{"as",Keywords.As},{"string",Keywords.String},{"int",Keywords.Int},
+            {"float",Keywords.Float},{"bool",Keywords.Bool},{"decimal",Keywords.Decimal},{"num",Keywords.Num},{"params",Keywords.Params},
+            {"if",Keywords.If},{"then",Keywords.Then},{"else",Keywords.Else},{"while",Keywords.While},{"endif",Keywords.EndIf},
+            {"do",Keywords.Do},{"import",Keywords.Import},{"fxn",Keywords.Fxn},{"static",Keywords.Static},{"and",Keywords.And},{"or",Keywords.Or},
+            {"struct",Keywords.Struct}
+        };
+*/

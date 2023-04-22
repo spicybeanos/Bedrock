@@ -1,0 +1,30 @@
+﻿[
+  [
+    "static",
+    "int",
+    "c",
+    "=",
+    "23"
+  ],
+  [
+    "let",
+    "f",
+    "=",
+    "\u0022efsfs\u0022"
+  ],
+  [
+    "fxn",
+    "main",
+    "()",
+    "{
+        const num x = 5
+        const num example=2
+        num y =0
+        while( y \u003C x )
+        {
+            y = y\u002B1;
+            println(\u0022Hello, world!\u0022)
+        }
+     }"
+  ]
+]

@@ -1,0 +1,15 @@
+C:\Users\AryanD\C#\Bedrock\bin\Debug\net6.0\Bedrock.exe
+C:\Users\AryanD\C#\Bedrock\bin\Debug\net6.0\Bedrock.deps.json
+C:\Users\AryanD\C#\Bedrock\bin\Debug\net6.0\Bedrock.runtimeconfig.json
+C:\Users\AryanD\C#\Bedrock\bin\Debug\net6.0\Bedrock.dll
+C:\Users\AryanD\C#\Bedrock\bin\Debug\net6.0\Bedrock.pdb
+C:\Users\AryanD\C#\Bedrock\obj\Debug\net6.0\Bedrock.csproj.AssemblyReference.cache
+C:\Users\AryanD\C#\Bedrock\obj\Debug\net6.0\Bedrock.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AryanD\C#\Bedrock\obj\Debug\net6.0\Bedrock.AssemblyInfoInputs.cache
+C:\Users\AryanD\C#\Bedrock\obj\Debug\net6.0\Bedrock.AssemblyInfo.cs
+C:\Users\AryanD\C#\Bedrock\obj\Debug\net6.0\Bedrock.csproj.CoreCompileInputs.cache
+C:\Users\AryanD\C#\Bedrock\obj\Debug\net6.0\Bedrock.dll
+C:\Users\AryanD\C#\Bedrock\obj\Debug\net6.0\refint\Bedrock.dll
+C:\Users\AryanD\C#\Bedrock\obj\Debug\net6.0\Bedrock.pdb
+C:\Users\AryanD\C#\Bedrock\obj\Debug\net6.0\Bedrock.genruntimeconfig.cache
+C:\Users\AryanD\C#\Bedrock\obj\Debug\net6.0\ref\Bedrock.dll

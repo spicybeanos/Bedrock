@@ -1,0 +1,7 @@
+int x = 32
+x = 2 + 3 - (9/2)
+int &y = x
+println(x,y,z)
+println(y)
+println(&y)
+callfunction()

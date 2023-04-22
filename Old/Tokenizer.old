@@ -1,0 +1,797 @@
+
+
+
+namespace Bedrock
+{
+    public class Tokenizer
+    {
+        public static List<string> keywords = new List<string>(){
+        "var", "void","new",
+        "del","as","string","int",
+        "float","bool","decimal","num","params",
+        "if","then","else","while","endif",
+        "do","import","fxn","static","and","or","struct"
+        };
+        public const char CURL_OPEN_BRACK = '{';
+        public const char CURL_CLOSE_BRACK = '}';
+        public const char SQUARE_OPEN_BRACK = '[';
+        public const char SQUARE_CLOSE_BRACK = ']';
+        public const string OPEN_BRACKS = "(";
+        public const string CLOSE_BRACKS = ")";
+        public const char HASHTAG = '#';
+        public static string MathOppps = "+-*/%=";
+        public static string SpecialCharacters = "~!@$^&:";
+        public static string LineSeparator { get { return Environment.NewLine; } }
+
+        public static string[] Split(string line, char separator = ' ')
+        {
+            List<string> ret_ = new List<string>();
+            string e = "";
+            char SPACE = separator;
+            bool withinQuotes_ = false;
+            //if bcc is > 0 then c is inside a bracket
+
+            int bcc = 0;
+            char brc_b = '\0', brc_a = '\0';
+            string openbs = "({";
+            string closebs = ")}";
+            string mathOps = "+-*/%=";
+
+            for (int i = 0; i < line.Length; i++)
+            {
+                char c = line[i];
+
+                if (c == '\"' )
+                {
+                    withinQuotes_ = !withinQuotes_;
+                    e += c;
+                    if (withinQuotes_ == false && bcc < 1)
+                    {
+                        if (e != "")
+                        {
+                            ret_.Add(e);
+                        }
+                        e = "";
+                    }
+                }
+                else if (openbs.Contains(c) && bcc < 1 && !withinQuotes_)
+                {
+                    brc_a = c;
+                    brc_b = closebs[openbs.IndexOf(c)];
+                    bcc++;
+                    if (e != "")
+                    {
+                        ret_.Add(e);
+                    }
+                    e = "";
+                    e += c;
+                }
+                else if (c == brc_a && !withinQuotes_)
+                {
+                    bcc++;
+                    e += c;
+                }
+                else if (c == brc_b && !withinQuotes_)
+                {
+                    bcc--;
+                    e += c;
+                    if (bcc < 1)
+                    {
+                        if (e != "")
+                        {
+                            ret_.Add(e);
+                        }
+                        brc_a = '\0';
+                        brc_b = '\0';
+                        e = "";
+                    }
+                }
+                else if (mathOps.Contains(c) && bcc < 1)
+                {
+                    if (e != "")
+                    {
+                        ret_.Add(e);
+                    }
+                    ret_.Add(c + "");
+                    e = "";
+                }
+                else if (c == SPACE && !withinQuotes_ && bcc < 1)
+                {
+                    if (e != "")
+                    {
+                        ret_.Add(e);
+                    }
+                    e = "";
+                }
+                else
+                {
+                    e += c;
+                }
+            }
+            if (e != "")
+            {
+                ret_.Add(e);
+            }
+            return ret_.ToArray();
+        }
+        public static string[] Unpack(string str)
+        {
+            string buff_ = str.Substring(1, str.Length - 2);
+            return Split(buff_);
+        }
+        public static string DeBrack(char brackA, char brackB, string str)
+        {
+            //if bcc is > 0 then c is inside a bracket
+            int substrstart = -1, len = 0;
+            int bcc = 0;
+            char brc_b = '\0';
+            string openbs = "([{";
+            string closebs= ")]}";
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                char c = str[i];
+
+
+                if (bcc > 0)
+                {
+                    len++;
+                }
+                if (openbs.Contains(c))
+                {
+                    bcc++;
+                    if(bcc == 1)
+                    {
+                        substrstart = i+1;
+                        brc_b = closebs[openbs.IndexOf(c)];
+                    }
+                }
+
+                if (closebs.Contains(c))
+                {
+                    bcc--;
+                    if(bcc == 0)
+                    {
+                        return str.Substring(substrstart, len-1);
+                    }
+                }
+
+            }
+
+            return str.Substring(substrstart, len);
+        }
+        public static string[][] ProccessText(string text)
+        {
+            const char endl = '\n', sp =' ',qt='\"',bkslash = '\\',comment = '#';
+            string e = "";
+            const string openb = "([{", closeb = ")]}",operators="+-*/%=<>&|:";
+            List<string> r = new List<string>();
+            List<string[]> ret = new List<string[]>();
+            char bo='\0', bc='\0';
+
+            int bcc = 0;
+            bool inqt = false,ignore_qt=false,isincomment = false;
+
+            text = text.Replace("\r", "");
+            for (int i = 0; i < text.Length; i++)
+            {
+                char c = text[i];
+                if (isincomment)
+                {
+                    if(c == endl)
+                    {
+                        isincomment = false;
+                        r.Add(e);
+                        e = "";
+                    }
+                }
+                else if (c == qt)
+                {
+                    if(!ignore_qt && bcc < 1)
+                        inqt = !inqt;
+
+                    e += c;
+                    if (!inqt && bcc < 1 )
+                    {
+                        if (e != "")
+                        {
+                            r.Add(e);
+                        }
+                        e = "";
+                    }
+                }
+                else if (c == comment)
+                {
+                    if(!inqt && bcc <= 0)
+                    isincomment = true;
+                    else
+                    e+= c;
+                }
+                else if (openb.Contains(c) && bcc < 1 && !inqt)
+                {
+                    bo = c;
+                    bc = closeb[openb.IndexOf(c)];
+                    bcc++;
+                    if (e != "")
+                    {
+                        r.Add(e);
+                    }
+                    e = "";
+                    e += c;
+                }
+                else if (c == bo && !inqt)
+                {
+                    bcc++;
+                    e += c;
+                }
+                else if (c == bc && !inqt)
+                {
+                    bcc--;
+                    e += c;
+                    if (bcc < 1)
+                    {
+                        if (e != "")
+                        {
+                            r.Add(e);
+                        }
+                        bo = '\0';
+                        bc = '\0';
+                        e = "";
+                    }
+                }
+                else if (operators.Contains(c) && bcc < 1 && !inqt)
+                {
+                    if (e != "")
+                    {
+                        r.Add(e);
+                    }
+                    r.Add(c + "");
+                    e = "";
+                }
+                else if (c == sp && !inqt && bcc < 1)
+                {
+                    if (e != "")
+                    {
+                        r.Add(e);
+                    }
+                    e = "";
+                }
+                else if (c == endl && bcc < 1)
+                {
+                    if (e != "")
+                    {
+                        r.Add(e);
+                    }
+                    e = "";
+                    if(r.Count > 0)
+                    {
+                        ret.Add(r.ToArray());
+                    }
+                    r = new List<string>();
+                }
+                else if (c == bkslash && inqt)
+                {
+                    e += c;
+                    ignore_qt = true;
+                }
+                else
+                {
+                    e += c;
+                    ignore_qt = false;
+                }
+            }
+
+            return ret.ToArray();
+        }
+
+        public static bool IsIdentifier(string value_)
+        {
+            if ((char.IsLetter(value_[0]) || value_[0] == '_'))
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool IsConstant(string value_)
+        {
+            if (value_.Contains("("))
+            {
+                return false;
+            }
+
+            bool withinQuotes_ = false;
+            //if bcc is > 0 then c is inside a bracket
+            int bcc = 0;
+            char brc_b = '\0', brc_a = '\0';
+            string openbs = "([{";
+
+            for (int i = 0; i < value_.Length; i++)
+            {
+                char c = value_[i];
+
+                if (c == '\"')
+                {
+                    withinQuotes_ = !withinQuotes_;
+                    if (withinQuotes_ == false && bcc < 1)
+                    {
+                        throw new Exception($"Bad brackets in \'{value_}\'");
+                    }
+                }
+                else if (openbs.Contains(c) && bcc < 1 && !withinQuotes_)
+                {
+                    return false;
+
+                }
+                else if (c == brc_a && !withinQuotes_)
+                {
+                    return false;
+
+                }
+                else if (c == brc_b && !withinQuotes_)
+                {
+                    return false;
+                }
+
+            }
+            return true;
+        }
+        public static bool IsKeyWord(string s)
+        {
+            if (keywords.Contains(s))
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool IsLiteral(string s)
+        {
+            if (IsIdentifier(s))
+            {
+                return false;
+            }
+            else
+            {
+                if (s[0] == '\"' && s[s.Length - 1] == '\"')
+                {
+                    return true;
+                }
+                else
+                {
+                    if(char.IsDigit(s[0])){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+            }
+        }
+        
+
+        public static string PrintArray(string[] arr)
+        {
+            string ret = "[";
+            for (int i = 0; i < arr.Length; i++)
+            {
+                ret += arr[i];
+                if (i < arr.Length - 1)
+                {
+                    ret += ";";
+                }
+            }
+            ret += "]";
+            return ret;
+        }
+
+        public static Token[][] GenerateTokens(string[][] buff)
+        {
+            List<Token[]> tokens = new List<Token[]>();
+
+            for (int i = 0; i < buff.Length; i++)
+            {
+                List<Token> ts = new List<Token>();
+
+                for (int j = 0; j < buff[i].Length; j++)
+                {
+                    string cod = buff[i][j];
+                    if(!cod.StartsWith('#')){
+                        Token t = Tokenize(cod);
+                    
+                        if (((string)t.value).Trim() != "")
+                        {
+                            ts.Add(t);
+                        }
+                    }
+                    
+                }
+
+                tokens.Add(ts.ToArray());
+            }
+
+            return tokens.ToArray();
+        }
+
+        private static Token Tokenize(string cod)
+        {
+            cod = cod.Trim();
+            if (IsLiteral(cod))
+            {
+                return new Token(cod, TokenIDs.Literal);
+            }
+            else if (IsKeyWord(cod))
+            {
+                return new Token(cod,TokenIDs.Keyword);
+            }
+            else if(IsIdentifier(cod)){
+                return new Token(cod,TokenIDs.Identifier);
+            }
+            else if(MathOppps.Contains(cod)){
+                return new Token(cod,TokenIDs.MathOpperator);
+            }
+            else if(SpecialCharacters.Contains(cod)){
+                return new Token(cod,TokenIDs.Special_Character);
+            }
+            else if(cod.StartsWith('(') && cod.EndsWith(')')){
+                return new Token(cod,TokenIDs.Block);
+            }
+            else if(cod.StartsWith('{') && cod.EndsWith('}')){
+                return new Token(cod,TokenIDs.Definition);
+            }
+            throw new Exception($"{cod} is not a valid token");
+        }
+    }
+
+    [System.Serializable]
+    public struct Token
+    {
+        public object value {get;set;}
+        public TokenIDs token{get;set;}
+        public Token(string _value, TokenIDs _token)
+        {
+            value = _value;
+            token = _token;
+        }
+        public Token(object _value, TokenIDs _token)
+        {
+            value = _value;
+            token = _token;
+        }
+        
+    }
+    public enum TokenIDs
+    {
+        Identifier,  //x , y player
+        Literal,  // 1 , 0.22f , "hello"
+        Keyword,  // int , fxn , import
+        MathOpperator, // +-*/%
+        Special_Character, //~!@#$^&:
+        Block,      //(...)
+        Definition, // {...}
+    }
+
+
+/*
+    public enum Keywords
+    {
+        
+        "var", "void","new",
+        "del","as","string","int",
+        "float","bool","decimal","num","params",
+        "if","then","else","while","endif",
+        "do","import","fxn","static","and","or" 
+        
+
+        Var, Void, New,
+        Del, As, String, Int,
+        Float, Bool, Decimal, Num, Params,
+        If, Then, Else, While, EndIf,
+        Do, Import, Fxn, Static, And, Or, Struct
+    }*/
+}
+
+
+/*
+    public class HelperSymbols
+    {
+        public const char DECIMAL_VALUE_ENDSWITH = 'D';
+        public const char FLOAT_VALUE_ENDSWITH = 'F';
+        public const char LONG_VALUE_ENDSWITH = 'L';
+        public const char SHORT_VALUE_ENDSWITH = 'S';
+        public const char BYTE_VALUE_ENDSWITH = 'B';
+    }
+}*/
+/*
+
+            if((bcc > 0 || !withinQuotes_) && c == brc_b){
+                    --bcc;
+                    e_ += c;
+                    if(bcc < 1){
+                        if(e_ != ""){
+                            ret_.Add(e_);
+                        }
+                        e_ = "";
+                    }
+                }
+                else if(bcc > 0){
+                    e_ += c;
+                }
+                else if(c == '\"' && bcc < 1)
+                {
+                    withinQuotes_ = !withinQuotes_;
+                    e_+= c;
+                }
+                //check for open bracket
+                else if((bcc < 1 || !withinQuotes_) && (c == '(' || c== '[' || c=='{')){
+                    brc_a = c;
+                    ++bcc;
+                    switch(c){
+                        case '(':
+                        brc_b = ')';
+                        break;
+                        case '[':
+                        brc_b = ']';
+                        break;
+                        case '{':
+                        brc_b = '}';
+                        break;
+                    }
+                    if(e_ != ""){
+                        ret_.Add(e_);
+                    }
+                    e_ = c + "";
+                }
+                else if((bcc > 0 || !withinQuotes_) && c == brc_a){
+                    ++bcc;
+                    e_ += c;
+                }
+                else if((bcc < 1|| !withinQuotes_) && mathOps.Contains(c)){
+                    if(e_ != ""){
+                        ret_.Add(e_);
+                    }
+                    ret_.Add(c + "");
+                    e_ = "";
+                }
+                else if(c != SPACE || (bcc > 0 || !withinQuotes_)){
+                    
+                    e_ += c;
+                }else{
+                    if(e_ != ""){
+                        ret_.Add(e_);
+                    }
+                    
+                    e_ = "";
+                }
+*/
+/*
+ 
+            char c = str[i];
+
+                if (c == '\"')
+                {
+                    withinQuotes_ = !withinQuotes_;
+                    if (withinQuotes_ == false && bcc < 1)
+                    {
+
+                    }
+                }
+                else if (openbs.Contains(c) && bcc < 1 && !withinQuotes_)
+                {
+                    brc_a = c;
+                    brc_b = closebs[openbs.IndexOf(c)];
+                    bcc++;
+                    if (substrstart < 0)
+                    {
+                        substrstart = i;
+                    }
+                    else
+                    {
+                        len = i - substrstart;
+                    }
+
+                }
+                else if (c == brc_a && !withinQuotes_)
+                {
+                    bcc++;
+
+                }
+                else if (c == brc_b && !withinQuotes_)
+                {
+                    bcc--;
+                    if (bcc < 1)
+                    {
+                        brc_a = '\0';
+                        brc_b = '\0';
+                    }
+                }
+ 
+ */
+/*
+ 
+        public static Token Tokenize(string cod)
+        {
+            Token t;
+
+            if (IsIdentifier(cod))
+            {
+                if (keywords.Contains(cod))
+                {
+                    t = (new Token(cod, TokenIDs.Keyword));
+                }
+                else
+                {
+                    t = (new Token(cod, TokenIDs.Identifier));
+                }
+            }
+            else if (cod.Trim().StartsWith(HASHTAG))
+            {
+                t = new Token(cod, TokenIDs.InterpreterFlag);
+            }
+            else
+            {
+                if (cod.Length >= 1)
+                {
+
+                    if (MathOppps.Contains(cod))
+                    {
+                        t = (new Token(cod, TokenIDs.MathOpperator));
+                    }
+                    else if (SpecialCharacters.Contains(cod))
+                    {
+                        t = (new Token(cod, TokenIDs.Special_Character));
+                    }
+                    else if (cod[0] == CURL_OPEN_BRACK
+                        && cod[cod.Length - 1] == CURL_CLOSE_BRACK)
+                    {
+                        t = (new Token(cod, TokenIDs.Definition));
+                    }
+                    else if (OPEN_BRACKS.Contains(cod[0]) &&
+                        CLOSE_BRACKS.Contains(cod[cod.Length - 1]))
+                    {
+                        t = (new Token(cod, TokenIDs.Block));
+                    }
+                    else
+                    {
+                        if (IsLiteral(cod))
+                        {
+                            t = (new Token(cod, TokenIDs.Literal));
+                        }
+                        else
+                        {
+                            t = (new Token(cod, TokenIDs.ComputeValue));
+                        }
+                    }
+                }
+                else
+                {
+                    throw new Exception($"Bad string found at {cod}");
+                }
+            }
+
+            return t;
+        } 
+
+ */
+/*
+        public static Token[] TokenizeLine(string[] strs)
+        {
+            List<Token> tokens = new List<Token>();
+            for (int i = 0; i < strs.Length; i++)
+            {
+                Token t;
+                try
+                {
+                    if (IsIdentifier(strs[i]))
+                    {
+                        if (keywords.Contains(strs[i]))
+                        {
+                            t = (new Token(strs[i], TokenIDs.Keyword));
+                        }
+                        else
+                        {
+                            t = (new Token(strs[i], TokenIDs.Identifier));
+                        }
+                    }
+                    else if (strs[i].Trim().StartsWith(HASHTAG))
+                    {
+                        t = new Token(strs[i], TokenIDs.InterpreterFlag);
+                    }
+                    else
+                    {
+                        if (strs[i].Length >= 1)
+                        {
+
+                            if (MathOppps.Contains(strs[i]))
+                            {
+                                t = (new Token(strs[i], TokenIDs.MathOpperator));
+                            }
+                            else if (SpecialCharacters.Contains(strs[i]))
+                            {
+                                t = (new Token(strs[i], TokenIDs.Special_Character));
+                            }
+                            else if (strs[i][0] == CURL_OPEN_BRACK
+                                && strs[i][strs[i].Length - 1] == CURL_CLOSE_BRACK)
+                            {
+                                t = (new Token(strs[i], TokenIDs.Definition));
+                            }
+                            else if (OPEN_BRACKS.Contains(strs[i][0]) &&
+                                CLOSE_BRACKS.Contains(strs[i][strs[i].Length - 1]))
+                            {
+                                t = (new Token(strs[i], TokenIDs.Block));
+                            }
+                            else
+                            {
+                                if (IsConstant(strs[i]))
+                                {
+                                    t = (new Token(strs[i], TokenIDs.Literal));
+                                }
+                                else
+                                {
+                                    t = (new Token(strs[i], TokenIDs.ComputeValue));
+                                }
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception($"Bad string found at index {i}");
+                        }
+                    }
+                    if (((string)t.value).Trim() != "")
+                    {
+                        tokens.Add(t);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"line : {i} | string : \"{strs[i]}\" | length : {strs[i].Length}\n{ex}");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+
+            return tokens.ToArray();
+        }
+ 
+ */
+/*
+ 
+         public static Token[] RetokeniseLine(Token[] toks)
+        {
+            Token[] tokens = new Token[toks.Length];
+            for (int i = 0; i < toks.Length; i++)
+            {
+                if (toks[i].token == TokenIDs.Block)
+                {
+                    string val = DeBrack('(',')',toks[i].value.ToString());
+                    Token[] rtt = TokenizeLine(Split(val));
+                    tokens[i] = new Token(rtt, TokenIDs.ComputedGroup);
+                }
+                else if(toks[i].token == TokenIDs.Definition)
+                {
+                    string val = DeBrack('{', '}', toks[i].value.ToString());
+                    Token[] rtt = TokenizeLine(Split(val));
+                    tokens[i] = new Token(rtt, TokenIDs.ComputedGroup);
+                }
+                else
+                {
+                    tokens[i] = toks[i];
+                }
+            }
+            return tokens;
+        }
+ 
+*/
+/*
+
+            //         int@main@(string[]@args)@{print(0)}
+            //         int main(string[] args){print("Hellow( worl")} "test 0"
+            //bcc      00000000111111111111110111111222222222222222210000000000
+            //is qt    00000000000000000000000000000010000000000000100010000001
+
+            //b>0      00000000111111111111110111111111111111111111110000000000
+            //wQ       00000000000000000000000000000000000000000000000011111110
+            //issep    00010000100000011100000100000100000001000001000000000100
+            //sep      00010000100000000000000100000000000000000000000100000000
+            //inc sep     0    1              1                             1
+
+
+*/
+

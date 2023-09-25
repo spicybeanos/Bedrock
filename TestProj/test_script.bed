@@ -5,29 +5,35 @@ string s = "efsfs"
 #comment int char string eofn odsnf ijnweo n s
 
 struct Vect3 {
-    int x
-    int y
-    int z
+     x : int
+     y : int
+     z : int
 }
- bool s = 3 == 2
-fxn main() {
-    const num x = 5
-    const num example=2
-    num y = 0 #this should be stored in the variableHandler as main:y
-    while ( y <= x )#ewiufbjhdsbfjhsdbf
-    {
-        y = y+1;
-        println("Hello, world!")
-    }
-   
-	
-	#pass by value
-	f(x)
-}
+foo : fxn[int][int];
+s :bool = 3 == 2
 
-Fxn<int> foo = f
-foo(x)
+fxn[int][int] def(ref int x)
+{
+    x = 33;
+    return 0;
+}
 
 fxn f(int x){
 	#do something
 }
+
+fxn[void] main() {
+    x,y : num = 5,9
+    z : num = 0 #this should be stored in the variableHandler
+    while ( y <= x ) #ewiufbjhdsbfjhsdbf
+    {
+        y = y+1;
+        println("Hello, world!");
+    }
+   
+	
+	#pass by value
+    foo = def;
+	f(x)
+}
+

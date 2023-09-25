@@ -1,0 +1,27 @@
+# basically, theres only one scope throught the program
+# all variables that have been decleared have to be deleted.
+# functions are just copy pasting code and using references and 
+# expecting them to exist. there is no returning
+#here is an example code file
+
+# this basically eliminates freeing and borrow checking and
+# everything else but it makes everything else a pain
+
+fxn main expect (int& len, string[]& args):
+    int a,b,c 
+    {
+        a = parseInt(args[0])
+        b = parseInt(args[1])
+        call sum : a , b , c
+    }
+end main
+
+fxn sum expect(int& a ,int &b ,int& c):
+    int sum 
+    {
+        sum = a + b
+        c = sum
+    }
+    #you cannot access sum outside these brackets
+    #because it does not exist
+end sum

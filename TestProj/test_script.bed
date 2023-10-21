@@ -1,10 +1,11 @@
 c:int = -23
 ased:int = -c +33
-s:int = "efsfs"
+s :int = "efsfs"
 
 #comment int char string eofn odsnf ijnweo n s
 
-struct Vect3 {
+struct Vect3 
+{
     x : int
     y : int
     z : int

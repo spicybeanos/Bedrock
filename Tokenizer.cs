@@ -10,32 +10,32 @@ namespace Bedrock
         public static string[][] ProccessText(string str,char separator = ' ')
         {
             string text = str;
-            const char endl = '\n', qt = '\"', bkslash = '\\', comment = '#';
+            const char endl = '\n', quote = '\"', bkslash = '\\', comment = '#';
 
             StringBuilder e = new("");
-            const string openb = "([{", closeb = ")]}", operators = "+-*/%&", compare = "<>!=";
+            const string openb = "([", closeb = ")]", operators = "+-*/%&:{}", compare = "<>!=";
             List<string> r = new List<string>();
             List<string[]> ret = new List<string[]>();
             char bo = '\0', bc = '\0';
 
             int bcc = 0;
-            bool inqt = false, ignore_qt = false, isincomment = false;
+            bool inqt = false, ignore_qt = false, isInComment = false;
 
             text = text.Replace("\r", "");
             for (int i = 0; i < text.Length; i++)
             {
                 char c = text[i];
-                if (isincomment)
+                if (isInComment)
                 {
                     if (c == endl)
                     {
-                        isincomment = false;
+                        isInComment = false;
                         if (!string.IsNullOrEmpty(e.ToString()))
                             r.Add(e.ToString());
                         e.Clear();
                     }
                 }
-                else if (c == qt)
+                else if (c == quote)
                 {
                     if (!ignore_qt && bcc < 1)
                         inqt = !inqt;
@@ -53,7 +53,7 @@ namespace Bedrock
                 else if (c == comment)
                 {
                     if (!inqt && bcc <= 0)
-                        isincomment = true;
+                        isInComment = true;
                     else
                         e.Append(c);
                 }
@@ -157,7 +157,7 @@ namespace Bedrock
             return ret.ToArray();
         }
         
-        public static List<List<Token>> SingleTokenizer(string[][] lines)
+        public static List<List<Token>> Tokenize(string[][] lines)
         {
             List<List<Token>> ret = new();
             for (int i = 0; i < lines.Length; i++)

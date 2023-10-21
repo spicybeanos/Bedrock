@@ -25,16 +25,24 @@ namespace Bedrock
         FunctionLocationAssign,
         Box,
         Boolean,
-        Definition
+        CurlyBracketOpen,
+        CurlyBracketClose,
+        EndOfLine
     }
     public class Token
     {
         public string Text { get; private set; }
+        public string tokenTagText {get{return tokenTag.ToString();}}
         public TokenType tokenTag { get; set; }
         public Token(string text)
         {
             Text = text;
             tokenTag = TokenType.Null;
+        }
+        public Token(string text,TokenType tokenType)
+        {
+            Text = text;
+            tokenTag = tokenType;
         }
 
         internal static readonly Dictionary<string, TokenType>
@@ -136,9 +144,13 @@ namespace Bedrock
             {
                 tok.tokenTag = SymbolStringToTokenType[s];
             }
-            else if (IsBody(s))
+            else if (s == Symbols.CURLY_OPEN)
             {
-                tok.tokenTag = TokenType.Definition;
+                tok.tokenTag = TokenType.CurlyBracketOpen;
+            }
+            else if (s == Symbols.CURLY_CLOSE)
+            {
+                tok.tokenTag = TokenType.CurlyBracketClose;
             }
             else if (IsBox(s))
             {
@@ -224,17 +236,6 @@ namespace Bedrock
         {
             return SYMBOLS.Contains(s.Trim());
         }
-        static bool IsBody(string s)
-        {
-            try
-            {
-                return s[0] == '{' && s[s.Length - 1] == '}';
-            }
-            catch
-            {
-                return false;
-            }
-        }
         static bool IsBox(string s)
         {
             try
@@ -298,6 +299,11 @@ namespace Bedrock
             GREATER_EQUAL = ">=", LESSER_EQUALS = "<=",
             FUNCTION_ASSIGN = "=>",
             COLON = ":",
-            AMPERSAND = "&", PIPE = "|",DOT = ".";
+            AMPERSAND = "&", PIPE = "|",
+            
+            
+            
+            
+            DOT = ".",CURLY_OPEN = "{",CURLY_CLOSE = "}";
     }
 }

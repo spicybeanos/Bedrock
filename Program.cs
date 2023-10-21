@@ -10,7 +10,16 @@ class Program
     {
         try
         {
-            
+            if(args.Length < 1)
+            {
+                Console.WriteLine("No file path provided. Terminating.");
+                return;
+            }
+
+            var text = Tokenizer.ProccessText(File.ReadAllText(args[0]));
+            JsonSerializerOptions op = new(){WriteIndented = true};
+            File.WriteAllText(outputPath,JsonSerializer.Serialize(text,op));
+            Console.WriteLine("Done.");
         }
         catch (Exception ex)
         {

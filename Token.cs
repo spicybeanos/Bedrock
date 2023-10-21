@@ -1,24 +1,28 @@
 
 
 
+using System.Linq.Expressions;
+
 namespace Bedrock
 {
 
     public enum TokenType
     {
+        Null,
         Identifier,
         KeyWord,
         DataType,
         MathOperation,
         BoolOperation,
-        Literal,
         Number,
+        Integer,
         Character,
         String,
         Compute,
         Symbol,
         Colon, Ampersand,
         Assigment,
+        FunctionLocationAssign,
         Box,
         Boolean,
         Definition
@@ -26,34 +30,19 @@ namespace Bedrock
     public class Token
     {
         public string Text { get; private set; }
-        public List<TokenType> tokenTags { get; set; }
-        public List<Token> ChildTokens { get; private set; }
-        public bool HasChildren
-        {
-            get
-            {
-                if (ChildTokens != null)
-                {
-                    return ChildTokens.Count > 0;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
+        public TokenType tokenTag { get; set; }
         public Token(string text)
         {
             Text = text;
-            ChildTokens = new();
-            tokenTags = new();
+            tokenTag = TokenType.Null;
         }
 
-        private static readonly Dictionary<string, TokenType>
-        SymbolStringToTokenType = new(){
+        internal static readonly Dictionary<string, TokenType>
+        SymbolStringToTokenType = new()
+        {
             {Symbols.PLUS,TokenType.MathOperation},
             {Symbols.MINUS,TokenType.MathOperation},
-            {Symbols.MULTIPLY,TokenType.MathOperation},
+            {Symbols.ASTERISK,TokenType.MathOperation},
             {Symbols.DIVIDE,TokenType.MathOperation},
             {Symbols.MODULUS,TokenType.MathOperation},
             {Symbols.BANG,TokenType.BoolOperation},
@@ -64,11 +53,12 @@ namespace Bedrock
             {Symbols.LESSER,TokenType.BoolOperation},
             {Symbols.GREATER_EQUAL,TokenType.BoolOperation},
             {Symbols.LESSER_EQUALS,TokenType.BoolOperation},
-            {Symbols.FUNCTION_ASSIGN,TokenType.Assigment},
-            {Symbols.COLON,TokenType.Symbol},
-            {Symbols.AMPERSAND,TokenType.Symbol}
+            {Symbols.FUNCTION_ASSIGN,TokenType.FunctionLocationAssign},
+            {Symbols.COLON,TokenType.Colon},
+            {Symbols.AMPERSAND,TokenType.Symbol},
+            {Symbols.PIPE,TokenType.Symbol}
         };
-        public static readonly List<string> KEYWORDS = new()
+        internal static readonly List<string> KEYWORDS = new()
         {
             Keywords.INT_TOKEN,
             Keywords.FLOAT_TOKEN,
@@ -82,9 +72,15 @@ namespace Bedrock
             Keywords.REF_TOKEN ,
             Keywords.STRUCT_TOKEN,
             Keywords.ARRAY_TOKEN ,
-            Keywords.IMPORT_TOKEN
+            Keywords.IMPORT_TOKEN,
+
+            Keywords.BOOL_FALSE,
+            Keywords.BOOL_TRUE,
+            Keywords.BOOL_OP_AND,
+            Keywords.BOOL_OP_OR
         };
-        public static readonly List<string> DATATYPES = new(){
+        internal static readonly List<string> DATATYPES = new()
+        {
             Keywords.INT_TOKEN,
             Keywords.FLOAT_TOKEN ,
             Keywords.STRING_TOKEN,
@@ -93,17 +89,78 @@ namespace Bedrock
             Keywords.BOOL_TOKEN ,
             Keywords.VOID_TOKEN
         };
-        public static readonly List<string> SYMBOLS = new(){
-            "+","-","*","/","%","!",
-            "=",
-            "==","!=",">","<",">=","<=",
-            "=>",
-            ":","&"
+        internal static readonly List<string> SYMBOLS = new()
+        {
+            Symbols.PLUS,
+            Symbols.MINUS ,
+            Symbols.ASTERISK ,
+            Symbols.DIVIDE,
+            Symbols.MODULUS ,
+            Symbols.BANG ,
+            Symbols.ASSIGN ,
+            Symbols.EQUALS ,
+            Symbols.NOT_EQUALS ,
+            Symbols.GREATER,
+            Symbols.LESSER ,
+            Symbols.GREATER_EQUAL ,
+            Symbols.LESSER_EQUALS ,
+            Symbols.FUNCTION_ASSIGN,
+            Symbols.COLON ,
+            Symbols.AMPERSAND,
+            Symbols.PIPE
         };
+
+
+        public static Token GetToken(string s)
+        {
+            Token tok = new(s);
+            if (IsIdentifier(s))
+            {
+                if (KEYWORDS.Contains(s))
+                {
+                    if (DATATYPES.Contains(s))
+                    {
+                        tok.tokenTag = TokenType.DataType;
+                    }
+                    else
+                    {
+                        tok.tokenTag = TokenType.KeyWord;
+                    }
+                }
+                else
+                {
+                    tok.tokenTag = TokenType.Identifier;
+                }
+            }
+            else if (IsSymbol(s))
+            {
+                tok.tokenTag = SymbolStringToTokenType[s];
+            }
+            else if (IsBody(s))
+            {
+                tok.tokenTag = TokenType.Definition;
+            }
+            else if (IsBox(s))
+            {
+                tok.tokenTag = TokenType.Box;
+            }
+            else
+            {
+                tok.tokenTag = GetLiteralType(s);
+            }
+            return tok;
+        }
 
         static bool IsIdentifier(string s)
         {
-            return char.IsLetter(s[0]) || s[0] == '_';
+            try
+            {
+                return char.IsLetter(s[0]) || s[0] == '_';
+            }
+            catch
+            {
+                return false;
+            }
         }
         static bool IsNumber(string s)
         {
@@ -118,6 +175,21 @@ namespace Bedrock
                 return false;
             }
             catch
+            {
+                return false;
+            }
+        }
+        static bool IsInteger(string s)
+        {
+            try
+            {
+                if (IsNumber(s))
+                {
+                    return !s.Contains(Symbols.DOT);
+                }
+                return false;
+            }
+            catch (System.Exception)
             {
                 return false;
             }
@@ -174,54 +246,25 @@ namespace Bedrock
                 return false;
             }
         }
+        static bool IsBoolean(string value)
+        {
+            return value == Keywords.BOOL_TRUE || value == Keywords.BOOL_FALSE;
+        }
         static TokenType GetLiteralType(string s)
         {
             if (IsNumber(s))
-                return TokenType.Number;
+                if(IsInteger(s))
+                    return TokenType.Integer;
+                else
+                    return TokenType.Number;
             else if (IsChar(s))
                 return TokenType.Character;
             else if (IsString(s))
                 return TokenType.String;
+            else if (IsBoolean(s))
+                return TokenType.Boolean;
             else
                 return TokenType.Compute;
-        }
-
-        public static Token GetToken(string s)
-        {
-            Token tok = new(s);
-            if (IsIdentifier(s))
-            {
-                if (KEYWORDS.Contains(s))
-                {
-                    tok.tokenTags.Add(TokenType.KeyWord);
-                    if (DATATYPES.Contains(s))
-                    {
-                        tok.tokenTags.Add(TokenType.DataType);
-                    }
-                }
-                else
-                {
-                    tok.tokenTags.Add(TokenType.Identifier);
-                }
-            }
-            else if (IsSymbol(s))
-            {
-                tok.tokenTags.Add(SymbolStringToTokenType[s]);
-            }
-            else if (IsBody(s))
-            {
-                tok.tokenTags.Add(TokenType.Definition);
-            }
-            else if (IsBox(s))
-            {
-                tok.tokenTags.Add(TokenType.Box);
-            }
-            else
-            {
-                tok.tokenTags.Add(TokenType.Literal);
-                tok.tokenTags.Add(GetLiteralType(s));
-            }
-            return tok;
         }
     }
     public class Keywords
@@ -238,13 +281,16 @@ namespace Bedrock
         REF_TOKEN = "ref",
         STRUCT_TOKEN = "struct",
         ARRAY_TOKEN = "array",
-        IMPORT_TOKEN = "import";
+        IMPORT_TOKEN = "import",
+        BOOL_TRUE = "true",
+        BOOL_FALSE = "false",
+        BOOL_OP_AND = "and",
+        BOOL_OP_OR = "OR";
     }
     public class Symbols
     {
         public const string
-            ASTERISK = "*",
-            PLUS = "+", MINUS = "-", MULTIPLY = "*", DIVIDE = "/", MODULUS = "%",
+            PLUS = "+", MINUS = "-", ASTERISK = "*", DIVIDE = "/", MODULUS = "%",
             BANG = "!",
             ASSIGN = "=",
             EQUALS = "==", NOT_EQUALS = "!=",
@@ -252,6 +298,6 @@ namespace Bedrock
             GREATER_EQUAL = ">=", LESSER_EQUALS = "<=",
             FUNCTION_ASSIGN = "=>",
             COLON = ":",
-            AMPERSAND = "&";
+            AMPERSAND = "&", PIPE = "|",DOT = ".";
     }
 }

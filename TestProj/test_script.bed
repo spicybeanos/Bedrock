@@ -1,6 +1,6 @@
-int c = -23
-int ased = -c +33
-string s = "efsfs"
+c:int = -23
+ased:int = -c +33
+s:int = "efsfs"
 
 #comment int char string eofn odsnf ijnweo n s
 

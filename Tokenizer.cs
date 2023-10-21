@@ -7,15 +7,7 @@ namespace Bedrock
 {
     public class Tokenizer
     {
-        private string str { get; set; }
-        private List<string> lines { get; set; }
-        
-        public Tokenizer(string text)
-        {
-            str = text;
-            lines = new();
-        }
-        public string[][] ProccessText(char sp = ' ')
+        public static string[][] ProccessText(string str,char separator = ' ')
         {
             string text = str;
             const char endl = '\n', qt = '\"', bkslash = '\\', comment = '#';
@@ -125,7 +117,7 @@ namespace Bedrock
                         e.Append(c);
                     }
                 }
-                else if (c == sp && !inqt && bcc < 1)
+                else if (c == separator && !inqt && bcc < 1)
                 {
                     if (!string.IsNullOrEmpty(e.ToString()))
                     {
@@ -165,8 +157,7 @@ namespace Bedrock
             return ret.ToArray();
         }
         
-        
-        public List<List<Token>> SingleTokenizer(string[][] lines)
+        public static List<List<Token>> SingleTokenizer(string[][] lines)
         {
             List<List<Token>> ret = new();
             for (int i = 0; i < lines.Length; i++)

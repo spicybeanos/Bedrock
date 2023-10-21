@@ -1,200 +1,63 @@
 [
   [
-    "int",
-    "x",
+    "c:int",
     "=",
-    "32"
+    "-23"
   ],
   [
-    "x",
+    "ased:int",
     "=",
-    "2",
-    "\u002B",
-    "3",
     "-",
-    "(9/2)"
+    "c",
+    "\u002B",
+    "33"
   ],
   [
-    "int",
-    "\u0026y",
+    "s:int",
     "=",
-    "x"
+    "\u0022efsfs\u0022"
   ],
   [
-    "println",
-    "(x,y,z)"
+    "struct",
+    "Vect3",
+    "{\n    x : int\n    y : int\n    z : int\n}"
   ],
   [
-    "println",
-    "(y)"
+    "foo",
+    ":",
+    "Fxn",
+    "[int]",
+    "[int]"
   ],
   [
-    "println",
-    "(\u0026y)"
+    "s",
+    ":bool",
+    "=",
+    "3",
+    "==",
+    "2"
   ],
   [
-    "callfunction",
-    "()"
+    "fxn",
+    "[int]",
+    "[int]",
+    "def",
+    "(ref int x)"
+  ],
+  [
+    "{\n    x = 33;\n    return 0;\n}"
+  ],
+  [
+    "fxn",
+    "f",
+    "(int x)",
+    "{\n\t#do something\n}"
+  ],
+  [
+    "fxn",
+    "[void]",
+    "main",
+    "()",
+    "{\n    x,y : num = 5,9\n    z : num = 0 #this should be stored in the variableHandler\n    while ( y \u003C= x ) #ewiufbjhdsbfjhsdbf\n    {\n        y = y\u002B1\n        println(\u0022Hello, world!\u0022)\n    }\n   \n\t\n\t#pass by value\n    foo = def\n\tf(x)\n}"
   ]
-]
-
-[
-  {
-    "tokens": [
-      {
-        "TokenValue": 2,
-        "TokenType": "Bedrock.Keyword"
-      },
-      {
-        "TokenValue": {
-          "IdentifierName": "x",
-          "IsReference": false
-        },
-        "TokenType": "Bedrock.BedIdentifier"
-      },
-      {
-        "TokenValue": 8,
-        "TokenType": "Bedrock.Operator"
-      },
-      {
-        "TokenValue": 32,
-        "TokenType": "System.Int32"
-      }
-    ],
-    "Length": 4
-  },
-  {
-    "tokens": [
-      {
-        "TokenValue": {
-          "IdentifierName": "x",
-          "IsReference": false
-        },
-        "TokenType": "Bedrock.BedIdentifier"
-      },
-      {
-        "TokenValue": 8,
-        "TokenType": "Bedrock.Operator"
-      },
-      {
-        "TokenValue": 2,
-        "TokenType": "System.Int32"
-      },
-      {
-        "TokenValue": 0,
-        "TokenType": "Bedrock.Operator"
-      },
-      {
-        "TokenValue": 3,
-        "TokenType": "System.Int32"
-      },
-      {
-        "TokenValue": 1,
-        "TokenType": "Bedrock.Operator"
-      },
-      {
-        "TokenValue": {
-          "ComputeString": "(9/2)"
-        },
-        "TokenType": "Bedrock.BedComputeValue"
-      }
-    ],
-    "Length": 7
-  },
-  {
-    "tokens": [
-      {
-        "TokenValue": 2,
-        "TokenType": "Bedrock.Keyword"
-      },
-      {
-        "TokenValue": "",
-        "TokenType": "System.String"
-      },
-      {
-        "TokenValue": 8,
-        "TokenType": "Bedrock.Operator"
-      },
-      {
-        "TokenValue": {
-          "IdentifierName": "x",
-          "IsReference": false
-        },
-        "TokenType": "Bedrock.BedIdentifier"
-      }
-    ],
-    "Length": 4
-  },
-  {
-    "tokens": [
-      {
-        "TokenValue": {
-          "IdentifierName": "println",
-          "IsReference": false
-        },
-        "TokenType": "Bedrock.BedIdentifier"
-      },
-      {
-        "TokenValue": {
-          "ComputeString": "(x,y,z)"
-        },
-        "TokenType": "Bedrock.BedComputeValue"
-      }
-    ],
-    "Length": 2
-  },
-  {
-    "tokens": [
-      {
-        "TokenValue": {
-          "IdentifierName": "println",
-          "IsReference": false
-        },
-        "TokenType": "Bedrock.BedIdentifier"
-      },
-      {
-        "TokenValue": {
-          "ComputeString": "(y)"
-        },
-        "TokenType": "Bedrock.BedComputeValue"
-      }
-    ],
-    "Length": 2
-  },
-  {
-    "tokens": [
-      {
-        "TokenValue": {
-          "IdentifierName": "println",
-          "IsReference": false
-        },
-        "TokenType": "Bedrock.BedIdentifier"
-      },
-      {
-        "TokenValue": {
-          "ComputeString": "(\u0026y)"
-        },
-        "TokenType": "Bedrock.BedComputeValue"
-      }
-    ],
-    "Length": 2
-  },
-  {
-    "tokens": [
-      {
-        "TokenValue": {
-          "IdentifierName": "callfunction",
-          "IsReference": false
-        },
-        "TokenType": "Bedrock.BedIdentifier"
-      },
-      {
-        "TokenValue": {
-          "ComputeString": "()"
-        },
-        "TokenType": "Bedrock.BedComputeValue"
-      }
-    ],
-    "Length": 2
-  }
 ]

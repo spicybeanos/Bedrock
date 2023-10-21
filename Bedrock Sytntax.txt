@@ -20,7 +20,7 @@ The following are constants:
 The following are valid types:
 	
 	numbers:
-		byte, int,  num, float, long
+		byte, int, float, long
 
 	others:
 		string,char,bool

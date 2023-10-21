@@ -5,11 +5,12 @@ string s = "efsfs"
 #comment int char string eofn odsnf ijnweo n s
 
 struct Vect3 {
-     x : int
-     y : int
-     z : int
+    x : int
+    y : int
+    z : int
 }
-foo : fxn[int][int];
+
+foo : Fxn[int][int]
 s :bool = 3 == 2
 
 fxn[int][int] def(ref int x)
@@ -27,13 +28,13 @@ fxn[void] main() {
     z : num = 0 #this should be stored in the variableHandler
     while ( y <= x ) #ewiufbjhdsbfjhsdbf
     {
-        y = y+1;
-        println("Hello, world!");
+        y = y+1
+        println("Hello, world!")
     }
    
 	
 	#pass by value
-    foo = def;
+    foo = def
 	f(x)
 }
 

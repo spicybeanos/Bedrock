@@ -16,11 +16,17 @@ class Program
                 return;
             }
 
-            var text = Tokenizer.ProccessText(File.ReadAllText(args[0]));
+            var text = Tokenizer.ProccessText_old(File.ReadAllText(args[0]));
             JsonSerializerOptions op = new() { WriteIndented = true };
 
             var tok = Tokenizer.Tokenize(text);
-
+            SyntaxChecker checker = new(tok);
+            var res = checker.Check();
+            Console.WriteLine($"Result:{res.Success}");
+            if (!res.Success)
+            {
+                Console.WriteLine(res.Message);
+            }
             File.WriteAllText(outputPath, JsonSerializer.Serialize(tok, op));
             Console.WriteLine("Done");
         }
@@ -28,22 +34,5 @@ class Program
         {
             Console.WriteLine($"Could not execute file: {ex}");
         }
-    }
-
-    static string spit(List<List<Token>> tok)
-    {
-        string @out = "{";
-        for (int i = 0; i < tok.Count; i++)
-        {
-            @out+="\n\t[";
-            for (int j = 0; j < tok[i].Count; j++)
-            {
-                @out +="\n\t\tText:\""+tok[i][j].Text+"\"";
-                @out+="\n\ttokenTag:"+tok[i][j].tokenTag.ToString();
-            }
-            @out += "\n\t],";
-        }
-        @out += "\n}";
-        return @out;
     }
 }

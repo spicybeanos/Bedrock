@@ -1,41 +1,12 @@
-c:int = -23
-ased:int = -c +33
-s :int = "efsfs"
 
-#comment int char string eofn odsnf ijnweo n s
-
-struct Vect3 
-{
-    x : int
-    y : int
-    z : int
+fxn [int] pi(){
+    return 3.14
 }
 
-foo : Fxn[int][int]
-s :bool = 3 == 2
-
-fxn[int][int] def(ref int x)
-{
-    x = 33;
-    return 0;
+fxn [void] main(){
+    c:int = -22
+    c = -2
+    b:bool = true
+    PI:Fxn[int] = pi
+    t:int = 3 + Num.Parse("33.09")+ PI()
 }
-
-fxn f(int x){
-	#do something
-}
-
-fxn[void] main() {
-    x,y : num = 5,9
-    z : num = 0 #this should be stored in the variableHandler
-    while ( y <= x ) #ewiufbjhdsbfjhsdbf
-    {
-        y = y+1
-        println("Hello, world!")
-    }
-   
-	
-	#pass by value
-    foo = def
-	f(x)
-}
-

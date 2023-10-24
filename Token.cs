@@ -12,19 +12,22 @@ namespace Bedrock
         Identifier,
         KeyWord,
         DataType,
-        MathOperation,
-        BoolOperation,
+        BinaryMathOperation,
+        BinaryBoolOperation,
+
         Number,
         Integer,
         Character,
         String,
-        Compute,
+        Boolean,
+
+        Parenthesis,
         Symbol,
         Colon, Ampersand,
         Assigment,
         FunctionLocationAssign,
+
         Box,
-        Boolean,
         CurlyBracketOpen,
         CurlyBracketClose,
         EndOfLine
@@ -48,19 +51,19 @@ namespace Bedrock
         internal static readonly Dictionary<string, TokenType>
         SymbolStringToTokenType = new()
         {
-            {Symbols.PLUS,TokenType.MathOperation},
-            {Symbols.MINUS,TokenType.MathOperation},
-            {Symbols.ASTERISK,TokenType.MathOperation},
-            {Symbols.DIVIDE,TokenType.MathOperation},
-            {Symbols.MODULUS,TokenType.MathOperation},
-            {Symbols.BANG,TokenType.BoolOperation},
+            {Symbols.PLUS,TokenType.BinaryMathOperation},
+            {Symbols.MINUS,TokenType.BinaryMathOperation},
+            {Symbols.ASTERISK,TokenType.BinaryMathOperation},
+            {Symbols.DIVIDE,TokenType.BinaryMathOperation},
+            {Symbols.MODULUS,TokenType.BinaryMathOperation},
+            {Symbols.BANG,TokenType.BinaryBoolOperation},
             {Symbols.ASSIGN,TokenType.Assigment},
-            {Symbols.EQUALS,TokenType.BoolOperation},
-            {Symbols.NOT_EQUALS,TokenType.BoolOperation},
-            {Symbols.GREATER,TokenType.BoolOperation},
-            {Symbols.LESSER,TokenType.BoolOperation},
-            {Symbols.GREATER_EQUAL,TokenType.BoolOperation},
-            {Symbols.LESSER_EQUALS,TokenType.BoolOperation},
+            {Symbols.EQUALS,TokenType.BinaryBoolOperation},
+            {Symbols.NOT_EQUALS,TokenType.BinaryBoolOperation},
+            {Symbols.GREATER,TokenType.BinaryBoolOperation},
+            {Symbols.LESSER,TokenType.BinaryBoolOperation},
+            {Symbols.GREATER_EQUAL,TokenType.BinaryBoolOperation},
+            {Symbols.LESSER_EQUALS,TokenType.BinaryBoolOperation},
             {Symbols.FUNCTION_ASSIGN,TokenType.FunctionLocationAssign},
             {Symbols.COLON,TokenType.Colon},
             {Symbols.AMPERSAND,TokenType.Symbol},
@@ -69,12 +72,17 @@ namespace Bedrock
         internal static readonly List<string> KEYWORDS = new()
         {
             Keywords.INT_TOKEN,
-            Keywords.FLOAT_TOKEN,
+            Keywords.NUMBER_TOKEN,
             Keywords.STRING_TOKEN,
             Keywords.CHAR_TOKEN ,
             Keywords.BYTE_TOKEN ,
             Keywords.BOOL_TOKEN ,
             Keywords.VOID_TOKEN ,
+            Keywords.FUNCTION_DATATYPE_TOKEN,
+
+            Keywords.IF_TOKEN,
+            Keywords.ELSE_TOKEN,
+            Keywords.WHILE_TOKEN,
 
             Keywords.FUNCTION_TOKEN,
             Keywords.REF_TOKEN ,
@@ -85,17 +93,20 @@ namespace Bedrock
             Keywords.BOOL_FALSE,
             Keywords.BOOL_TRUE,
             Keywords.BOOL_OP_AND,
-            Keywords.BOOL_OP_OR
+            Keywords.BOOL_OP_OR,
+
+            Keywords.RETURN
         };
         internal static readonly List<string> DATATYPES = new()
         {
             Keywords.INT_TOKEN,
-            Keywords.FLOAT_TOKEN ,
+            Keywords.NUMBER_TOKEN,
             Keywords.STRING_TOKEN,
             Keywords.CHAR_TOKEN ,
             Keywords.BYTE_TOKEN ,
             Keywords.BOOL_TOKEN ,
-            Keywords.VOID_TOKEN
+            Keywords.VOID_TOKEN,
+            Keywords.FUNCTION_DATATYPE_TOKEN
         };
         internal static readonly List<string> SYMBOLS = new()
         {
@@ -167,7 +178,7 @@ namespace Bedrock
         {
             try
             {
-                return char.IsLetter(s[0]) || s[0] == '_';
+                return (char.IsLetter(s[0]) || s[0] == '_') && !s.Contains(Symbols.COMMA);
             }
             catch
             {
@@ -265,28 +276,33 @@ namespace Bedrock
             else if (IsBoolean(s))
                 return TokenType.Boolean;
             else
-                return TokenType.Compute;
+                return TokenType.Parenthesis;
         }
     }
     public class Keywords
     {
         public const string
         INT_TOKEN = "int",
-        FLOAT_TOKEN = "float",
+        NUMBER_TOKEN = "num",
         STRING_TOKEN = "string",
         CHAR_TOKEN = "char",
         BYTE_TOKEN = "byte",
         VOID_TOKEN = "void",
         BOOL_TOKEN = "bool",
         FUNCTION_TOKEN = "fxn",
+        FUNCTION_DATATYPE_TOKEN = "Fxn",
         REF_TOKEN = "ref",
         STRUCT_TOKEN = "struct",
+        WHILE_TOKEN = "while",
+        IF_TOKEN = "if",
+        ELSE_TOKEN = "else",
         ARRAY_TOKEN = "array",
         IMPORT_TOKEN = "import",
         BOOL_TRUE = "true",
         BOOL_FALSE = "false",
         BOOL_OP_AND = "and",
-        BOOL_OP_OR = "OR";
+        BOOL_OP_OR = "or",
+        RETURN = "return";
     }
     public class Symbols
     {
@@ -304,6 +320,6 @@ namespace Bedrock
             
             
             
-            DOT = ".",CURLY_OPEN = "{",CURLY_CLOSE = "}";
+            DOT = ".",CURLY_OPEN = "{",CURLY_CLOSE = "}",COMMA = ",";
     }
 }

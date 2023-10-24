@@ -8,7 +8,7 @@
     {
       "Text": ":",
       "tokenTagText": "Colon",
-      "tokenTag": 12
+      "tokenTag": 13
     },
     {
       "Text": "int",
@@ -18,197 +18,41 @@
     {
       "Text": "=",
       "tokenTagText": "Assigment",
-      "tokenTag": 14
+      "tokenTag": 15
     },
     {
-      "Text": "-23",
+      "Text": "-22",
       "tokenTagText": "Integer",
       "tokenTag": 7
     }
   ],
   [
-    {
-      "Text": "ased",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
-    },
-    {
-      "Text": ":",
-      "tokenTagText": "Colon",
-      "tokenTag": 12
-    },
-    {
-      "Text": "int",
-      "tokenTagText": "DataType",
-      "tokenTag": 3
-    },
-    {
-      "Text": "=",
-      "tokenTagText": "Assigment",
-      "tokenTag": 14
-    },
-    {
-      "Text": "-",
-      "tokenTagText": "MathOperation",
-      "tokenTag": 4
-    },
     {
       "Text": "c",
       "tokenTagText": "Identifier",
       "tokenTag": 1
     },
     {
-      "Text": "\u002B",
-      "tokenTagText": "MathOperation",
-      "tokenTag": 4
+      "Text": "=",
+      "tokenTagText": "Assigment",
+      "tokenTag": 15
     },
     {
-      "Text": "33",
+      "Text": "-2",
       "tokenTagText": "Integer",
       "tokenTag": 7
     }
   ],
   [
     {
-      "Text": "s",
+      "Text": "b",
       "tokenTagText": "Identifier",
       "tokenTag": 1
     },
     {
       "Text": ":",
       "tokenTagText": "Colon",
-      "tokenTag": 12
-    },
-    {
-      "Text": "int",
-      "tokenTagText": "DataType",
-      "tokenTag": 3
-    },
-    {
-      "Text": "=",
-      "tokenTagText": "Assigment",
-      "tokenTag": 14
-    },
-    {
-      "Text": "\u0022efsfs\u0022",
-      "tokenTagText": "String",
-      "tokenTag": 9
-    }
-  ],
-  [
-    {
-      "Text": "struct",
-      "tokenTagText": "KeyWord",
-      "tokenTag": 2
-    },
-    {
-      "Text": "Vect3",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
-    }
-  ],
-  [
-    {
-      "Text": "{",
-      "tokenTagText": "CurlyBracketOpen",
-      "tokenTag": 18
-    }
-  ],
-  [
-    {
-      "Text": "x",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
-    },
-    {
-      "Text": ":",
-      "tokenTagText": "Colon",
-      "tokenTag": 12
-    },
-    {
-      "Text": "int",
-      "tokenTagText": "DataType",
-      "tokenTag": 3
-    }
-  ],
-  [
-    {
-      "Text": "y",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
-    },
-    {
-      "Text": ":",
-      "tokenTagText": "Colon",
-      "tokenTag": 12
-    },
-    {
-      "Text": "int",
-      "tokenTagText": "DataType",
-      "tokenTag": 3
-    }
-  ],
-  [
-    {
-      "Text": "z",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
-    },
-    {
-      "Text": ":",
-      "tokenTagText": "Colon",
-      "tokenTag": 12
-    },
-    {
-      "Text": "int",
-      "tokenTagText": "DataType",
-      "tokenTag": 3
-    }
-  ],
-  [
-    {
-      "Text": "}",
-      "tokenTagText": "CurlyBracketClose",
-      "tokenTag": 19
-    }
-  ],
-  [
-    {
-      "Text": "foo",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
-    },
-    {
-      "Text": ":",
-      "tokenTagText": "Colon",
-      "tokenTag": 12
-    },
-    {
-      "Text": "Fxn",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
-    },
-    {
-      "Text": "[int]",
-      "tokenTagText": "Box",
-      "tokenTag": 16
-    },
-    {
-      "Text": "[int]",
-      "tokenTagText": "Box",
-      "tokenTag": 16
-    }
-  ],
-  [
-    {
-      "Text": "s",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
-    },
-    {
-      "Text": ":",
-      "tokenTagText": "Colon",
-      "tokenTag": 12
+      "tokenTag": 13
     },
     {
       "Text": "bool",
@@ -218,7 +62,92 @@
     {
       "Text": "=",
       "tokenTagText": "Assigment",
-      "tokenTag": 14
+      "tokenTag": 15
+    },
+    {
+      "Text": "true",
+      "tokenTagText": "KeyWord",
+      "tokenTag": 2
+    }
+  ],
+  [
+    {
+      "Text": "struct",
+      "tokenTagText": "KeyWord",
+      "tokenTag": 2
+    },
+    {
+      "Text": "Test",
+      "tokenTagText": "Identifier",
+      "tokenTag": 1
+    },
+    {
+      "Text": "{",
+      "tokenTagText": "CurlyBracketOpen",
+      "tokenTag": 18
+    }
+  ],
+  [
+    {
+      "Text": "a",
+      "tokenTagText": "Identifier",
+      "tokenTag": 1
+    },
+    {
+      "Text": ":",
+      "tokenTagText": "Colon",
+      "tokenTag": 13
+    },
+    {
+      "Text": "string",
+      "tokenTagText": "DataType",
+      "tokenTag": 3
+    }
+  ],
+  [
+    {
+      "Text": "b",
+      "tokenTagText": "Identifier",
+      "tokenTag": 1
+    },
+    {
+      "Text": ":",
+      "tokenTagText": "Colon",
+      "tokenTag": 13
+    },
+    {
+      "Text": "byte",
+      "tokenTagText": "DataType",
+      "tokenTag": 3
+    }
+  ],
+  [
+    {
+      "Text": "}",
+      "tokenTagText": "CurlyBracketClose",
+      "tokenTag": 19
+    }
+  ],
+  [
+    {
+      "Text": "t",
+      "tokenTagText": "Identifier",
+      "tokenTag": 1
+    },
+    {
+      "Text": ":",
+      "tokenTagText": "Colon",
+      "tokenTag": 13
+    },
+    {
+      "Text": "int",
+      "tokenTagText": "DataType",
+      "tokenTag": 3
+    },
+    {
+      "Text": "=",
+      "tokenTagText": "Assigment",
+      "tokenTag": 15
     },
     {
       "Text": "3",
@@ -226,14 +155,19 @@
       "tokenTag": 7
     },
     {
-      "Text": "==",
-      "tokenTagText": "BoolOperation",
-      "tokenTag": 5
+      "Text": "\u002B",
+      "tokenTagText": "BinaryMathOperation",
+      "tokenTag": 4
     },
     {
-      "Text": "2",
-      "tokenTagText": "Integer",
-      "tokenTag": 7
+      "Text": "NumParse",
+      "tokenTagText": "Identifier",
+      "tokenTag": 1
+    },
+    {
+      "Text": "(\u002233.09\u0022)",
+      "tokenTagText": "Parenthesis",
+      "tokenTag": 11
     }
   ],
   [
@@ -245,121 +179,17 @@
     {
       "Text": "[int]",
       "tokenTagText": "Box",
-      "tokenTag": 16
+      "tokenTag": 17
     },
     {
-      "Text": "[int]",
-      "tokenTagText": "Box",
-      "tokenTag": 16
-    },
-    {
-      "Text": "def",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
-    },
-    {
-      "Text": "(ref int x)",
-      "tokenTagText": "Compute",
-      "tokenTag": 10
-    }
-  ],
-  [
-    {
-      "Text": "{",
-      "tokenTagText": "CurlyBracketOpen",
-      "tokenTag": 18
-    }
-  ],
-  [
-    {
-      "Text": "x",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
-    },
-    {
-      "Text": "=",
-      "tokenTagText": "Assigment",
-      "tokenTag": 14
-    },
-    {
-      "Text": "33;",
-      "tokenTagText": "Integer",
-      "tokenTag": 7
-    }
-  ],
-  [
-    {
-      "Text": "return",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
-    },
-    {
-      "Text": "0;",
-      "tokenTagText": "Integer",
-      "tokenTag": 7
-    }
-  ],
-  [
-    {
-      "Text": "}",
-      "tokenTagText": "CurlyBracketClose",
-      "tokenTag": 19
-    }
-  ],
-  [
-    {
-      "Text": "fxn",
-      "tokenTagText": "KeyWord",
-      "tokenTag": 2
-    },
-    {
-      "Text": "f",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
-    },
-    {
-      "Text": "(int x)",
-      "tokenTagText": "Compute",
-      "tokenTag": 10
-    },
-    {
-      "Text": "{",
-      "tokenTagText": "CurlyBracketOpen",
-      "tokenTag": 18
-    }
-  ],
-  [
-    {
-      "Text": "",
-      "tokenTagText": "Compute",
-      "tokenTag": 10
-    },
-    {
-      "Text": "}",
-      "tokenTagText": "CurlyBracketClose",
-      "tokenTag": 19
-    }
-  ],
-  [
-    {
-      "Text": "fxn",
-      "tokenTagText": "KeyWord",
-      "tokenTag": 2
-    },
-    {
-      "Text": "[void]",
-      "tokenTagText": "Box",
-      "tokenTag": 16
-    },
-    {
-      "Text": "main",
+      "Text": "pi",
       "tokenTagText": "Identifier",
       "tokenTag": 1
     },
     {
       "Text": "()",
-      "tokenTagText": "Compute",
-      "tokenTag": 10
+      "tokenTagText": "Parenthesis",
+      "tokenTag": 11
     },
     {
       "Text": "{",
@@ -369,110 +199,14 @@
   ],
   [
     {
-      "Text": "x,y",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
+      "Text": "return",
+      "tokenTagText": "KeyWord",
+      "tokenTag": 2
     },
     {
-      "Text": ":",
-      "tokenTagText": "Colon",
-      "tokenTag": 12
-    },
-    {
-      "Text": "num",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
-    },
-    {
-      "Text": "=",
-      "tokenTagText": "Assigment",
-      "tokenTag": 14
-    },
-    {
-      "Text": "5,9",
-      "tokenTagText": "Integer",
-      "tokenTag": 7
-    }
-  ],
-  [
-    {
-      "Text": "z",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
-    },
-    {
-      "Text": ":",
-      "tokenTagText": "Colon",
-      "tokenTag": 12
-    },
-    {
-      "Text": "num",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
-    },
-    {
-      "Text": "=",
-      "tokenTagText": "Assigment",
-      "tokenTag": 14
-    },
-    {
-      "Text": "0",
-      "tokenTagText": "Integer",
-      "tokenTag": 7
-    },
-    {
-      "Text": "while",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
-    },
-    {
-      "Text": "( y \u003C= x )",
-      "tokenTagText": "Compute",
-      "tokenTag": 10
-    },
-    {
-      "Text": "{",
-      "tokenTagText": "CurlyBracketOpen",
-      "tokenTag": 18
-    }
-  ],
-  [
-    {
-      "Text": "y",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
-    },
-    {
-      "Text": "=",
-      "tokenTagText": "Assigment",
-      "tokenTag": 14
-    },
-    {
-      "Text": "y",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
-    },
-    {
-      "Text": "\u002B",
-      "tokenTagText": "MathOperation",
-      "tokenTag": 4
-    },
-    {
-      "Text": "1",
-      "tokenTagText": "Integer",
-      "tokenTag": 7
-    }
-  ],
-  [
-    {
-      "Text": "println",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
-    },
-    {
-      "Text": "(\u0022Hello, world!\u0022)",
-      "tokenTagText": "Compute",
-      "tokenTag": 10
+      "Text": "3.14",
+      "tokenTagText": "Number",
+      "tokenTag": 6
     }
   ],
   [
@@ -484,50 +218,34 @@
   ],
   [
     {
-      "Text": "",
-      "tokenTagText": "Compute",
-      "tokenTag": 10
-    }
-  ],
-  [
-    {
-      "Text": "",
-      "tokenTagText": "Compute",
-      "tokenTag": 10
-    },
-    {
-      "Text": "foo",
+      "Text": "PI",
       "tokenTagText": "Identifier",
       "tokenTag": 1
+    },
+    {
+      "Text": ":",
+      "tokenTagText": "Colon",
+      "tokenTag": 13
+    },
+    {
+      "Text": "Fxn",
+      "tokenTagText": "DataType",
+      "tokenTag": 3
+    },
+    {
+      "Text": "[int]",
+      "tokenTagText": "Box",
+      "tokenTag": 17
     },
     {
       "Text": "=",
       "tokenTagText": "Assigment",
-      "tokenTag": 14
+      "tokenTag": 15
     },
     {
-      "Text": "def",
+      "Text": "pi",
       "tokenTagText": "Identifier",
       "tokenTag": 1
-    }
-  ],
-  [
-    {
-      "Text": "f",
-      "tokenTagText": "Identifier",
-      "tokenTag": 1
-    },
-    {
-      "Text": "(x)",
-      "tokenTagText": "Compute",
-      "tokenTag": 10
-    }
-  ],
-  [
-    {
-      "Text": "}",
-      "tokenTagText": "CurlyBracketClose",
-      "tokenTag": 19
     }
   ]
 ]

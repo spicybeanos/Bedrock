@@ -1,0 +1,66 @@
+* Strongly typed
+* Manifest typed
+* Try to make everything a variable
+
+The following are literals:
+
+	123 (int/number)
+	0x7B (int/number)
+	123b (byte->int/number)
+	123.12 (number)
+	"asdsadasd" (string)
+	true (bool)
+	'a' (char)
+
+
+The following are constants:
+
+	1+2
+	1.0+2.3
+	1.335f + 9999 + -3.5254502 + 526L
+
+The following are valid types:
+	
+	numbers:
+		byte, int, float, long, double
+
+	others:
+		string,char,bool
+
+How to declear a varible (not sure which one is best yet):
+
+x : int = 10;
+x : int;
+cosnt x : int = 5;
+
+//function references
+// they have to be assigned to a constant function later on!
+// dangling functions are not allowed! (yet)
+hello : fxn ;   //not allowed
+sum : fxn[int] ;// allowed
+sum : fxn[int][int,int]; // allowed
+
+//immutable functions
+fxn hello (){
+	println("Hello world");
+}
+fxn [int] sum (a:int, b:int)
+{
+	return a + b;
+}
+fxn [int] [int,int] sum (a:int, b:int)
+{
+	return a + b;
+}
+
+following are arrays:
+	{1,2,4,5} (int array)
+	{1f,2f,3f,4f} (float array)
+	{1.3333,32b,2123432L,333 ,98.0000002}  (number array)
+	{x:int;y:int;z:int;} (struct)
+
+
+following are function types:
+	fxn
+	fxn[int]  //int is the return type
+	fxn[int][int,int]  // int is the return type and the parameter types are ints

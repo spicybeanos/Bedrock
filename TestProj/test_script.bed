@@ -1,11 +1,11 @@
 
 namespace program 
 {
-    fxn int pi()
+    fxn [int] pi()
     {
         return 3.14;
     }
-    fxn int pi(k:int)
+    fxn [int] pi(k:int)
     {
         return 3.14;
     }
@@ -18,14 +18,14 @@ namespace program
     //you can do 
     // v:Vec2 = {3,4}
     // v.magnitude();
-    fxn float magnitude(&Vect2 this)
+    fxn [float] magnitude(&Vect2 this)
     {
         return system.math.sqrt((this.x * this.x) + (this.y * this.y));
     }
 
     //int = system.i32
     //float = system.f32
-    pub fxn void main()
+    pub fxn [void] main()
     {
         c:i32 = -22;
         

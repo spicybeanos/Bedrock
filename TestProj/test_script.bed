@@ -1,20 +1,39 @@
 
 namespace program 
 {
-    fxn[int] pi()
+    fxn int pi()
     {
         return 3.14;
     }
+    fxn int pi(k:int)
+    {
+        return 3.14;
+    }
+    struct Vec2{
+        x:int;
+        y:int;
+    }
+
+    //by doing (&<type> this)
+    //you can do 
+    // v:Vec2 = {3,4}
+    // v.magnitude();
+    fxn float magnitude(&Vect2 this)
+    {
+        return system.math.sqrt((this.x * this.x) + (this.y * this.y));
+    }
+
     //int = system.i32
     //float = system.f32
-    pub fxn[void] main()
+    pub fxn void main()
     {
         c:i32 = -22;
+        
         text:str = "Hello world";
         c = -2;
         b:bool = true;
-        PI:Fxn[int] = pi;
-        t:int = 3 + f32.Parse("33.09")+ PI();
+        _pi__:Fxn[int] = pi;
+        t:int = 3 + f32.Parse("33.09") + _pi__();
         println(text);
     }
 }

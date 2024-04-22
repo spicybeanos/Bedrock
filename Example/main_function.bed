@@ -1,1 +1,1 @@
-+= + * 21 [32] [0x66] {0X22} (0B011101) ("Hello world") abc efg
++= + * 21 [32] [0x66] {0X22} (0B011101) ("Hello world\"") abc efg

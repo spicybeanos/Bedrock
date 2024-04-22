@@ -2,8 +2,7 @@ namespace Bedrock
 {
     public class Syntax
     {
-        private readonly Dictionary<string, TokenType> m_stringToTType = new 
-        Dictionary<
+        private readonly Dictionary<string, TokenType> m_stringToTType = new Dictionary<
             string,
             TokenType
         >()
@@ -37,6 +36,32 @@ namespace Bedrock
             if (m_stringToTType.ContainsKey(word))
                 return m_stringToTType[word];
             throw new Exception($"not a key word : [{word}]");
+        }
+
+        public class KeywordAsString
+        {
+            public const string Function = "fxn",
+                Byte = "byte",
+                Int = "int",
+                Long = "long",
+                Float = "float",
+                Double = "double",
+                String = "string",
+                Char = "char",
+                Bool = "bool",
+                Void = "void",
+                Return = "return",
+                True = "true",
+                False = "false",
+                Null = "null",
+                If = "if",
+                Else = "else",
+                While = "while",
+                Then = "then",
+                Switch = "switch",
+                Case = "case",
+                Import = "import",
+                Ref = "ref";
         }
     }
 }

@@ -189,11 +189,14 @@ namespace Bedrock
                             current++;
                             int length = 0;
                             int start = current;
-                            for (; current < text.Length ? text[current] != '"' : false; current++)
+                            bool escape = false;
+                            for (; current < text.Length ? escape || text[current] != '"' : false; current++)
                             {
                                 if (text[current] == '\n')
                                     line++;
                                 length++;
+                                escape = false;
+                                if(text[current] == '\\') escape = true;
                             }
                             tokens.Add(new(TokenType.StringLiteral, start, line, length));
                         }

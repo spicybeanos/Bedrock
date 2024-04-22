@@ -1,0 +1,6 @@
+#hello this is a comment ignore me
+
+fxn main () {
+    sys.println("Hello world!");
+    i := 1+2+ 4;
+}

@@ -1,4 +1,4 @@
-* Strongly typed
+﻿* Strongly typed
 * Manifest typed
 * Try to make everything a variable
 
@@ -6,11 +6,11 @@ The following are literals:
 
 	123 (int/number)
 	0x7B (int/number)
-	123b (byte,int/number)
-	123.12 (float/number)
+	123b (byte->int/number)
+	123.12 (number)
 	"asdsadasd" (string)
 	true (bool)
-	'a' (char/byte/int)
+	'a' (char)
 
 
 The following are constants:
@@ -22,35 +22,32 @@ The following are constants:
 The following are valid types:
 	
 	numbers:
-		byte, int, long, float, long, double
+		byte, int, float, long, double
 
 	others:
-		string,char,bool
+		string,bool
 
 How to declear a varible (not sure which one is best yet):
 
-x := 10;
 x : int = 10;
-x : i32 = 10;
-x : int; //defaults to zero
-const x : int = 5;
+x : int;
+cosnt x : int = 5;
 
-//function references
+//mutable functions
 // they have to be assigned to a constant function later on!
 // dangling functions are not allowed! (yet)
-hello : fxn             //not allowed
-sum : fxn[int]          // allowed
-sum : fxn[int][int,int] // allowed
+hello : fxn ;
+sum : fxn[int] ;
 
 //immutable functions
 fxn hello (){
 	println("Hello world");
 }
-fxn [int] sum (a:int, b:int)
+fxn[int] sum (a:int, b:int)
 {
 	return a + b;
 }
-fxn <int> [int,int] sum (a:int, b:int)
+fxn[int][int,int] sum (a:int, b:int)
 {
 	return a + b;
 }
@@ -59,6 +56,8 @@ following are arrays:
 	{1,2,4,5} (int array)
 	{1f,2f,3f,4f} (float array)
 	{1.3333,32b,2123432L,333 ,98.0000002}  (number array)
+	{x:int;y:int;z:int} (struct)
+
 
 following are function types:
 	fxn

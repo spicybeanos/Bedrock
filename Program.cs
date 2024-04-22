@@ -16,10 +16,11 @@ class Program
         mathfunc = new Bedrock.SystemFunctions.Math.Add(BedrockType.String);
         var result = mathfunc.ExecuteFunction(new object[] { "hello ", "world" });
 
-        Console.WriteLine(result);
+        //Console.WriteLine(result);
         foreach (var t in tokens)
         {
-            Console.Write(text.Substring(t.startIndex, t.length));
+            //" -> "+ t.tokenType+
+            Console.Write($"`{text.Substring(t.startIndex, t.length)}`"+" -> "+ t.tokenType+" ,");
             if (t.tokenType == TokenType.EndStatement)
                 Console.WriteLine();
         }

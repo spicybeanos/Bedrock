@@ -61,7 +61,7 @@ namespace Bedrock
                             {
                                 if (text[current + 1] == '=')
                                 {
-                                    tokens.Add(new(TokenType.PlusEquals, current, line));
+                                    tokens.Add(new(TokenType.PlusEquals, current, line, 2));
                                     current++;
                                 }
                                 else
@@ -78,7 +78,7 @@ namespace Bedrock
                             {
                                 if (text[current + 1] == '=')
                                 {
-                                    tokens.Add(new(TokenType.Equality, current, line));
+                                    tokens.Add(new(TokenType.Equality, current, line, 2));
                                     current++;
                                 }
                                 else
@@ -95,7 +95,7 @@ namespace Bedrock
                             {
                                 if (text[current + 1] == '=')
                                 {
-                                    tokens.Add(new(TokenType.AutoAssign, current, line));
+                                    tokens.Add(new(TokenType.AutoAssign, current, line, 2));
                                     current++;
                                 }
                                 else
@@ -112,7 +112,7 @@ namespace Bedrock
                             {
                                 if (text[current + 1] == '=')
                                 {
-                                    tokens.Add(new(TokenType.MinusEquals, current, line));
+                                    tokens.Add(new(TokenType.MinusEquals, current, line, 2));
                                     current++;
                                 }
                                 else
@@ -129,7 +129,7 @@ namespace Bedrock
                             {
                                 if (text[current + 1] == '=')
                                 {
-                                    tokens.Add(new(TokenType.StarEquals, current, line));
+                                    tokens.Add(new(TokenType.StarEquals, current, line, 2));
                                     current++;
                                 }
                                 else
@@ -146,7 +146,7 @@ namespace Bedrock
                             {
                                 if (text[current + 1] == '=')
                                 {
-                                    tokens.Add(new(TokenType.SlashEquals, current, line));
+                                    tokens.Add(new(TokenType.SlashEquals, current, line, 2));
                                     current++;
                                 }
                                 else
@@ -163,7 +163,7 @@ namespace Bedrock
                             {
                                 if (text[current + 1] == '=')
                                 {
-                                    tokens.Add(new(TokenType.ModulusEquals, current, line));
+                                    tokens.Add(new(TokenType.ModulusEquals, current, line, 2));
                                     current++;
                                 }
                                 else
@@ -195,7 +195,7 @@ namespace Bedrock
                                     line++;
                                 length++;
                             }
-                            tokens.Add(new(TokenType.StringLiteral, current, length));
+                            tokens.Add(new(TokenType.StringLiteral, start, line, length));
                         }
                         break;
 
@@ -217,11 +217,9 @@ namespace Bedrock
                             for (
                                 ;
                                 current < text.Length ? char.IsDigit(text[current]) : false;
-                                current++
+                                current++, length++
                             )
-                            {
-                                length++;
-                            }
+                                ;
 
                             if (current < text.Length ? text[current] == '.' : false)
                             {
@@ -229,49 +227,60 @@ namespace Bedrock
                                 current++;
                                 for (
                                     ;
-                                    current < text.Length ? char.IsDigit(text[current]) : false;
-                                    current++
+                                    current < text.Length
+                                        ? char.IsDigit(text[current]) && text[current] != ' '
+                                        : false;
+                                    current++, length++
                                 )
-                                {
-                                    length++;
-                                }
+                                    ;
 
                                 tokens.Add(
                                     new Token(TokenType.DecimalLiteral, start, line, length)
                                 );
                             }
-                            else if (current < text.Length ? text[current] == 'x' : false)
+                            else if (
+                                current < text.Length
+                                    ? (text[current] == 'x' || text[current] == 'X')
+                                    : false
+                            )
                             {
                                 length++;
                                 current++;
                                 for (
                                     ;
-                                    current < text.Length ? char.IsDigit(text[current]) : false;
-                                    current++
+                                    current < text.Length
+                                        ? char.IsDigit(text[current]) && text[current] != ' '
+                                        : false;
+                                    current++, length++
                                 )
-                                {
-                                    length++;
-                                }
+                                    ;
 
                                 tokens.Add(
                                     new Token(TokenType.HexIntegerLiteral, start, line, length)
                                 );
+                                current--;
                             }
-                            else if (current < text.Length ? text[current] == 'b' : false)
+                            else if (
+                                current < text.Length
+                                    ? (text[current] == 'b' || text[current] == 'B')
+                                    : false
+                            )
                             {
                                 length++;
                                 current++;
                                 for (
                                     ;
-                                    current < text.Length ? char.IsDigit(text[current]) : false;
-                                    current++
+                                    current < text.Length
+                                        ? char.IsDigit(text[current]) && text[current] != ' '
+                                        : false;
+                                    current++, length++
                                 )
-                                {
-                                    length++;
-                                }
+                                    ;
+
                                 tokens.Add(
                                     new Token(TokenType.BinIntegerLiteral, start, line, length)
                                 );
+                                current--;
                             }
                             else
                             {
@@ -280,19 +289,25 @@ namespace Bedrock
                             }
                         }
                         break;
-                }
 
-                if (char.IsLetter(c) || c == '_')
-                {
-                    int start = current,length=0;
-                    for (
-                        ;
-                        current < text.Length ? char.IsLetterOrDigit(c) || c == '_' : false;
-                        current++
-                    ) {
-                        length++;
-                     }
-                    tokens.Add(new Token(TokenType.Identifier,start,line,length));
+                    default:
+
+                        {
+                            if (char.IsLetter(text[current]) || text[current] == '_')
+                            {
+                                int start = current,
+                                    length = 0;
+                                for (
+                                    ;
+                                    current < text.Length
+                                        ? (char.IsLetterOrDigit(text[current]) || text[current] == '_') && text[current] != ' '
+                                        : false;
+                                    current++,length++
+                                );
+                                tokens.Add(new Token(TokenType.Identifier, start, line, length));
+                            }
+                        }
+                        break;
                 }
             }
 

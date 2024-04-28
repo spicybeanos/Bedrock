@@ -15,9 +15,8 @@ class Program
         IFunction mathfunc;
         mathfunc = new Bedrock.SystemFunctions.Math.Add(BedrockType.Int32);
         var result = mathfunc.ExecuteFunction(new object[] { 1, 2 });
-
+        
         //Console.WriteLine(result);
-        Convert.ToInt32("0x31", 16);
         foreach (var t in tokens)
         {
             //" -> "+ t.tokenType+

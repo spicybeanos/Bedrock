@@ -47,7 +47,6 @@ namespace Bedrock
                 Float = "float",
                 Double = "double",
                 String = "string",
-                Char = "char",
                 Bool = "bool",
                 Void = "void",
                 Return = "return",
@@ -61,7 +60,8 @@ namespace Bedrock
                 Switch = "switch",
                 Case = "case",
                 Import = "import",
-                Ref = "ref";
+                Ref = "ref",
+                Unique = "unique";
         }
     }
 }

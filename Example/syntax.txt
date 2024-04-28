@@ -4,13 +4,13 @@
 
 The following are literals:
 
-	123 (int/number)
-	0x7B (int/number)
+	123 (<integer>)
+	0x7B (u<num>)
 	123b (byte,int/number)
 	123.12 (float/number)
 	"asdsadasd" (string)
 	true (bool)
-	'a' (char/byte/int)
+	'a' (ushort/int)
 
 
 The following are constants:
@@ -22,10 +22,10 @@ The following are constants:
 The following are valid types:
 	
 	numbers:
-		byte, int, long, float, long, double
+		(s)byte, (u)int, (u)long, float, double
 
 	others:
-		string,char,bool
+		string,bool
 
 How to declear a varible (not sure which one is best yet):
 
@@ -61,6 +61,5 @@ following are arrays:
 	{1.3333,32b,2123432L,333 ,98.0000002}  (number array)
 
 following are function types:
-	fxn
 	fxn[int]  //int is the return type
 	fxn[int][int,int]  // int is the return type and the parameter types are ints

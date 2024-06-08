@@ -308,6 +308,7 @@ namespace Bedrock
                                     current++,length++
                                 );
                                 tokens.Add(new Token(TokenType.Identifier, start, line, length));
+                                current--;
                             }
                         }
                         break;

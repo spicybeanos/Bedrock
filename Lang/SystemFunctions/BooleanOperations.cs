@@ -34,6 +34,106 @@ namespace Bedrock
                     }
                 }
             }
+
+
+            public class Equality : BinaryFunction
+            {
+
+                public Equality(BedrockType type)
+                {
+                    Type = type;
+                }
+
+                public override object ExecuteFunction(object[] args)
+                {
+                    Compare compare = new Compare(Type);
+                    int res = (int)compare.ExecuteFunction(args);
+
+                    return res == 0;
+                }
+            }
+            public class Greater : BinaryFunction
+            {
+
+                public Greater(BedrockType type)
+                {
+                    Type = type;
+                }
+
+                public override object ExecuteFunction(object[] args)
+                {
+                    Compare compare = new Compare(Type);
+                    int res = (int)compare.ExecuteFunction(args);
+
+                    return res > 0;
+                }
+            }
+
+            public class Lesser : BinaryFunction
+            {
+
+                public Lesser(BedrockType type)
+                {
+                    Type = type;
+                }
+
+                public override object ExecuteFunction(object[] args)
+                {
+                    Compare compare = new Compare(Type);
+                    int res = (int)compare.ExecuteFunction(args);
+
+                    return res < 0;
+                }
+            }
+            public class Inequality : BinaryFunction
+            {
+
+                public Inequality(BedrockType type)
+                {
+                    Type = type;
+                }
+
+                public override object ExecuteFunction(object[] args)
+                {
+                    Compare compare = new Compare(Type);
+                    int res = (int)compare.ExecuteFunction(args);
+
+                    return res != 0;
+                }
+            }
+            public class GreaterEquals : BinaryFunction
+            {
+
+                public GreaterEquals(BedrockType type)
+                {
+                    Type = type;
+                }
+
+                public override object ExecuteFunction(object[] args)
+                {
+                    Compare compare = new Compare(Type);
+                    int res = (int)compare.ExecuteFunction(args);
+
+                    return res >= 0;
+                }
+            }
+
+            public class LesserEquals : BinaryFunction
+            {
+
+                public LesserEquals(BedrockType type)
+                {
+                    Type = type;
+                }
+
+                public override object ExecuteFunction(object[] args)
+                {
+                    Compare compare = new Compare(Type);
+                    int res = (int)compare.ExecuteFunction(args);
+
+                    return res <= 0;
+                }
+            }
         }
     }
 }

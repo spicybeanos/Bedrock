@@ -2,7 +2,7 @@ namespace Bedrock
 {
     namespace SystemFunctions
     {
-        public class Math
+        namespace Math
         {
             public class Add : BinaryFunction
             {

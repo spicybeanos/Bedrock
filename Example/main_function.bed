@@ -1,1 +1,4 @@
-+= + * 21 [32] [0x66] {0X22} (0B011101) ("Hello world\"") abc efg
+fxn main(args:string[])
+{
+    system.print("Hello world!");
+}

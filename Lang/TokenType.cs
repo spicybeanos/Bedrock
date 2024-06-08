@@ -52,7 +52,7 @@ namespace Bedrock
 
         //key words
         Function,
-        Byte,Int,Long,Float,Double,String,Char,Bool,Void,
+        Byte,Int,Long,Float,Double,String,UShort,Bool,Void,
         Return,True,False,Null,
         
         If,Else,While,Then,Switch,Case

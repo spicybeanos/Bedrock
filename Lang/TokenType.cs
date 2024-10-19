@@ -3,13 +3,12 @@
 
 namespace Bedrock
 {
-    public enum TokenType
+    public enum TokenType : byte
     {
+        EOF,
         EndStatement,
         StringLiteral,
         IntegerLiteral,
-        HexIntegerLiteral,
-        BinIntegerLiteral,
         DecimalLiteral,
         Identifier,
         Colon,
@@ -25,14 +24,14 @@ namespace Bedrock
         RightSquare,
         LeftBrace,
         RightBrace,
-        LeftAngle,
-        RightAngle,
+        LeftAngle_Lesser,
+        RightAngle_Greater,
 
         //operators
         GreaterEquals,
         LesserEquals,
 
-        Equality,
+        EqualEquals,
 
         Bang,
         BangEquals,
@@ -51,13 +50,15 @@ namespace Bedrock
         Ampersand,Pipe,Carrot,
 
         //key words
-        Function,
-        Byte,Int,Long,Float,Double,String,UShort,Bool,Void,
+        Fxn,Fxn_type,
+        Class,Self,
+        Byte,Short,Int,Float,String,Void,
         Return,True,False,Null,
         
         If,Else,While,Then,Switch,Case
         
         ,Import,Ref,
-        
+        Var,
+        For
     }
 }

@@ -23,26 +23,26 @@ namespace Bedrock
                         break;
 
                     case '(':
-                        tokens.Add(new(TokenType.LeftParentesis, current, line));
+                        tokens.Add(new(TokenType.LeftParentesis, "(", line));
                         break;
                     case ')':
-                        tokens.Add(new(TokenType.RightParentesis, current, line));
+                        tokens.Add(new(TokenType.RightParentesis, ")", line));
                         break;
                     case '[':
-                        tokens.Add(new(TokenType.LeftSquare, current, line));
+                        tokens.Add(new(TokenType.LeftSquare, "[", line));
                         break;
                     case ']':
-                        tokens.Add(new(TokenType.RightSquare, current, line));
+                        tokens.Add(new(TokenType.RightSquare, "]", line));
                         break;
                     case '{':
-                        tokens.Add(new(TokenType.LeftBrace, current, line));
+                        tokens.Add(new(TokenType.LeftBrace, "{", line));
                         break;
                     case '}':
-                        tokens.Add(new(TokenType.RightBrace, current, line));
+                        tokens.Add(new(TokenType.RightBrace, "}", line));
                         break;
 
                     case ';':
-                        tokens.Add(new Token(TokenType.EndStatement, current, line));
+                        tokens.Add(new Token(TokenType.EndStatement, ";", line));
                         break;
 
                     case '#':
@@ -61,12 +61,12 @@ namespace Bedrock
                             {
                                 if (text[current + 1] == '=')
                                 {
-                                    tokens.Add(new(TokenType.PlusEquals, current, line, 2));
+                                    tokens.Add(new(TokenType.PlusEquals, "+=", line));
                                     current++;
                                 }
                                 else
                                 {
-                                    tokens.Add(new(TokenType.Plus, current, line));
+                                    tokens.Add(new(TokenType.Plus, "+", line));
                                 }
                             }
                         }
@@ -78,12 +78,46 @@ namespace Bedrock
                             {
                                 if (text[current + 1] == '=')
                                 {
-                                    tokens.Add(new(TokenType.Equality, current, line, 2));
+                                    tokens.Add(new(TokenType.EqualEquals, "==", line));
                                     current++;
                                 }
                                 else
                                 {
-                                    tokens.Add(new(TokenType.Assign, current, line));
+                                    tokens.Add(new(TokenType.Assign, "=", line));
+                                }
+                            }
+                        }
+                        break;
+                    case '>':
+
+                        {
+                            if (current + 1 < text.Length)
+                            {
+                                if (text[current + 1] == '=')
+                                {
+                                    tokens.Add(new(TokenType.GreaterEquals, ">=", line));
+                                    current++;
+                                }
+                                else
+                                {
+                                    tokens.Add(new(TokenType.RightAngle_Greater, ">", line));
+                                }
+                            }
+                        }
+                        break;
+                    case '<':
+
+                        {
+                            if (current + 1 < text.Length)
+                            {
+                                if (text[current + 1] == '=')
+                                {
+                                    tokens.Add(new(TokenType.LesserEquals, "<=", line));
+                                    current++;
+                                }
+                                else
+                                {
+                                    tokens.Add(new(TokenType.LeftAngle_Lesser, "<", line));
                                 }
                             }
                         }
@@ -95,12 +129,12 @@ namespace Bedrock
                             {
                                 if (text[current + 1] == '=')
                                 {
-                                    tokens.Add(new(TokenType.AutoAssign, current, line, 2));
+                                    tokens.Add(new(TokenType.AutoAssign, ":=", line));
                                     current++;
                                 }
                                 else
                                 {
-                                    tokens.Add(new(TokenType.Colon, current, line));
+                                    tokens.Add(new(TokenType.Colon, ":", line));
                                 }
                             }
                         }
@@ -112,12 +146,12 @@ namespace Bedrock
                             {
                                 if (text[current + 1] == '=')
                                 {
-                                    tokens.Add(new(TokenType.MinusEquals, current, line, 2));
+                                    tokens.Add(new(TokenType.MinusEquals, "-=", line));
                                     current++;
                                 }
                                 else
                                 {
-                                    tokens.Add(new(TokenType.Minus, current, line));
+                                    tokens.Add(new(TokenType.Minus, "-", line));
                                 }
                             }
                         }
@@ -129,12 +163,12 @@ namespace Bedrock
                             {
                                 if (text[current + 1] == '=')
                                 {
-                                    tokens.Add(new(TokenType.StarEquals, current, line, 2));
+                                    tokens.Add(new(TokenType.StarEquals, "*=", line));
                                     current++;
                                 }
                                 else
                                 {
-                                    tokens.Add(new(TokenType.Star, current, line));
+                                    tokens.Add(new(TokenType.Star, "*", line));
                                 }
                             }
                         }
@@ -146,12 +180,12 @@ namespace Bedrock
                             {
                                 if (text[current + 1] == '=')
                                 {
-                                    tokens.Add(new(TokenType.SlashEquals, current, line, 2));
+                                    tokens.Add(new(TokenType.SlashEquals, "/=", line));
                                     current++;
                                 }
                                 else
                                 {
-                                    tokens.Add(new(TokenType.Slash, current, line));
+                                    tokens.Add(new(TokenType.Slash, "/", line));
                                 }
                             }
                         }
@@ -163,24 +197,24 @@ namespace Bedrock
                             {
                                 if (text[current + 1] == '=')
                                 {
-                                    tokens.Add(new(TokenType.ModulusEquals, current, line, 2));
+                                    tokens.Add(new(TokenType.ModulusEquals, "%=", line));
                                     current++;
                                 }
                                 else
                                 {
-                                    tokens.Add(new(TokenType.ModulusEquals, current, line));
+                                    tokens.Add(new(TokenType.ModulusEquals, "%", line));
                                 }
                             }
                         }
                         break;
                     case '^':
-                        tokens.Add(new Token(TokenType.Carrot, current, line));
+                        tokens.Add(new Token(TokenType.Carrot, "^", line));
                         break;
                     case '|':
-                        tokens.Add(new Token(TokenType.Pipe, current, line));
+                        tokens.Add(new Token(TokenType.Pipe, "|", line));
                         break;
                     case '&':
-                        tokens.Add(new Token(TokenType.Ampersand, current, line));
+                        tokens.Add(new Token(TokenType.Ampersand, "&", line));
                         break;
 
                     case '"':
@@ -190,15 +224,20 @@ namespace Bedrock
                             int length = 0;
                             int start = current;
                             bool escape = false;
-                            for (; current < text.Length ? escape || text[current] != '"' : false; current++)
+                            for (
+                                ;
+                                current < text.Length ? escape || text[current] != '"' : false;
+                                current++
+                            )
                             {
                                 if (text[current] == '\n')
                                     line++;
                                 length++;
                                 escape = false;
-                                if(text[current] == '\\') escape = true;
+                                if (text[current] == '\\')
+                                    escape = true;
                             }
-                            tokens.Add(new(TokenType.StringLiteral, start, line, length));
+                            tokens.Add(new(TokenType.StringLiteral, text.Substring(start,length), line));
                         }
                         break;
 
@@ -235,10 +274,10 @@ namespace Bedrock
                                         : false;
                                     current++, length++
                                 )
-                                    ;
+                                ;
 
                                 tokens.Add(
-                                    new Token(TokenType.DecimalLiteral, start, line, length)
+                                   new Token(TokenType.DecimalLiteral, text.Substring(start,length), line)
                                 );
                             }
                             else if (
@@ -259,7 +298,7 @@ namespace Bedrock
                                     ;
 
                                 tokens.Add(
-                                    new Token(TokenType.HexIntegerLiteral, start, line, length)
+                                    new Token(TokenType.IntegerLiteral, text.Substring(start,length), line)
                                 );
                                 current--;
                             }
@@ -281,13 +320,15 @@ namespace Bedrock
                                     ;
 
                                 tokens.Add(
-                                    new Token(TokenType.BinIntegerLiteral, start, line, length)
+                                    new Token(TokenType.IntegerLiteral, text.Substring(start,length), line)
                                 );
                                 current--;
+
+                                
                             }
                             else
                             {
-                                tokens.Add(new(TokenType.IntegerLiteral, start, line, length));
+                                tokens.Add(new(TokenType.IntegerLiteral, text.Substring(start,length), line));
                                 current--;
                             }
                         }
@@ -303,17 +344,26 @@ namespace Bedrock
                                 for (
                                     ;
                                     current < text.Length
-                                        ? (char.IsLetterOrDigit(text[current]) || text[current] == '_') && text[current] != ' '
+                                        ? (
+                                            char.IsLetterOrDigit(text[current])
+                                            || text[current] == '_'
+                                        )
+                                            && text[current] != ' '
                                         : false;
-                                    current++,length++
-                                );
-                                tokens.Add(new Token(TokenType.Identifier, start, line, length));
+                                    current++, length++
+                                )
+                                    ;
+                                string word_ = text.Substring(start, length);
+                                var tt = Syntax.GetKeyword(word_);
+                                tokens.Add(new Token(tt, text.Substring(start,length), line));
                                 current--;
                             }
                         }
                         break;
                 }
             }
+
+            tokens.Add(new Token(TokenType.EOF, "", line));
 
             return tokens;
         }

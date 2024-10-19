@@ -1,0 +1,122 @@
+//for now, we will type cast explicitly
+
+
+namespace Bedrock
+{
+    namespace SystemFunctions
+    {
+        public class ExplicitPrimitiveTypeCast : IFunction
+        {
+            public BedrockType ReturnType { get; set; }
+            public string Name { get; private set; } = "PrimitiveTypecast";
+
+            public ExplicitPrimitiveTypeCast(BedrockType returnType)
+            {
+                ReturnType = returnType;
+            }
+
+            public object ExecuteFunction(object[] args)
+            {
+                if (args.Length != 1)
+                    throw new Exception("Exactly one argument is needed!");
+
+                var argtype = BedrockType.GetPrimitiveType(args[0].GetType());
+
+                switch (ReturnType.BedRockType)
+                {
+                    case BedrockType.BedrockPrimitiveType.UInt8:
+
+                        {
+                            switch (argtype)
+                            {
+                                case BedrockType.BedrockPrimitiveType.UInt8:
+                                    return (byte)args[0];
+                                case BedrockType.BedrockPrimitiveType.Int32:
+                                    return (byte)(int)args[0];
+                                case BedrockType.BedrockPrimitiveType.Float32:
+                                    return (byte)(float)args[0];
+                                case BedrockType.BedrockPrimitiveType.String:
+                                    throw new Exception("Cannot caste String to UInt8");
+                            }
+                        }
+                        break;
+                    case BedrockType.BedrockPrimitiveType.Int32:
+
+                        {
+                            switch (argtype)
+                            {
+                                case BedrockType.BedrockPrimitiveType.UInt8:
+                                    return (int)(byte)args[0];
+                                case BedrockType.BedrockPrimitiveType.Int32:
+                                    return (int)args[0];
+                                case BedrockType.BedrockPrimitiveType.Float32:
+                                    return (int)(float)args[0];
+                                case BedrockType.BedrockPrimitiveType.String:
+                                    throw new Exception("Cannot caste String to Int32");
+                            }
+                        }
+                        break;
+                    case BedrockType.BedrockPrimitiveType.Float32:
+
+                        {
+                            switch (argtype)
+                            {
+                                case BedrockType.BedrockPrimitiveType.UInt8:
+                                    return (float)(byte)args[0];
+                                case BedrockType.BedrockPrimitiveType.Int32:
+                                    return (float)(int)args[0];
+                                case BedrockType.BedrockPrimitiveType.Float32:
+                                    return (float)args[0];
+                                case BedrockType.BedrockPrimitiveType.String:
+                                    throw new Exception("Cannot caste String to Float32");
+                            }
+                        }
+                        break;
+                    case BedrockType.BedrockPrimitiveType.String:
+
+                        {
+                            switch (argtype)
+                            {
+                                case BedrockType.BedrockPrimitiveType.UInt8:
+                                    return (byte)args[0]+ "";
+                                case BedrockType.BedrockPrimitiveType.Int32:
+                                    return (int)args[0]+ "";
+                                case BedrockType.BedrockPrimitiveType.Float32:
+                                    return (float)args[0]+ "";
+                                case BedrockType.BedrockPrimitiveType.String:
+                                    return (string)args[0];
+                            }
+                        }
+                        break;
+                }
+
+                return 0;
+            }
+
+            public string GetName()
+            {
+                return Name;
+            }
+
+            public string[] GetParamsName()
+            {
+                return new string[]{"a"};
+            }
+
+            public BedrockType[] GetParamsTypes()
+            {
+                throw new NotImplementedException();
+            }
+
+            public string GetPrototypedName()
+            {
+                throw new NotImplementedException();
+            }
+
+            public BedrockType GetReturnType()
+            {
+                throw new NotImplementedException();
+            }
+        }
+    }
+}

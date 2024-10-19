@@ -8,7 +8,7 @@ namespace Bedrock
             {
                 public Add(BedrockType type)
                 {
-                    Type = type;
+                    returnType = type;
                     Name = "Add";
                 }
 
@@ -17,23 +17,19 @@ namespace Bedrock
                     if (args.Length != 2)
                         throw new ArgumentException("Only 2 Arguments!");
 
-                    switch (Type.BedRockType)
+                    switch (returnType.BedRockType)
                     {
                         case BedrockType.BedrockPrimitiveType.UInt8:
                             return (byte)args[0] + (byte)args[1];
                         case BedrockType.BedrockPrimitiveType.Int32:
                             return (int)args[0] + (int)args[1];
-                        case BedrockType.BedrockPrimitiveType.Int64:
-                            return (long)args[0] + (long)args[1];
                         case BedrockType.BedrockPrimitiveType.Float32:
                             return (float)args[0] + (float)args[1];
-                        case BedrockType.BedrockPrimitiveType.Float64:
-                            return (double)args[0] + (double)args[1];
                         case BedrockType.BedrockPrimitiveType.String:
                             return (string)args[0] + (string)args[1];
 
                         default:
-                            throw new Exception($"Invalid generic type : {Type.GetTypeName()}");
+                            throw new Exception($"Invalid generic type : {returnType.GetTypeName()}");
                     }
                 }
             }
@@ -42,7 +38,7 @@ namespace Bedrock
             {
                 public Minus(BedrockType type)
                 {
-                    Type = type;
+                    returnType = type;
                     Name = "Minus";
                 }
 
@@ -51,21 +47,17 @@ namespace Bedrock
                     if (args.Length != 2)
                         throw new ArgumentException("Only 2 Arguments!");
 
-                    switch (Type.BedRockType)
+                    switch (returnType.BedRockType)
                     {
                         case BedrockType.BedrockPrimitiveType.UInt8:
                             return (byte)args[0] - (byte)args[1];
                         case BedrockType.BedrockPrimitiveType.Int32:
                             return (int)args[0] - (int)args[1];
-                        case BedrockType.BedrockPrimitiveType.Int64:
-                            return (long)args[0] - (long)args[1];
                         case BedrockType.BedrockPrimitiveType.Float32:
                             return (float)args[0] - (float)args[1];
-                        case BedrockType.BedrockPrimitiveType.Float64:
-                            return (double)args[0] - (double)args[1];
 
                         default:
-                            throw new Exception($"Invalid generic type : {Type.GetTypeName()}");
+                            throw new Exception($"Invalid generic type : {returnType.GetTypeName()}");
                     }
                 }
             }
@@ -74,7 +66,7 @@ namespace Bedrock
             {
                 public Multiply(BedrockType type)
                 {
-                    Type = type;
+                    returnType = type;
                     Name = "Multiply";
                 }
 
@@ -83,21 +75,17 @@ namespace Bedrock
                     if (args.Length != 2)
                         throw new ArgumentException("Only 2 Arguments!");
 
-                    switch (Type.BedRockType)
+                    switch (returnType.BedRockType)
                     {
                         case BedrockType.BedrockPrimitiveType.UInt8:
                             return (byte)args[0] * (byte)args[1];
                         case BedrockType.BedrockPrimitiveType.Int32:
                             return (int)args[0] * (int)args[1];
-                        case BedrockType.BedrockPrimitiveType.Int64:
-                            return (long)args[0] * (long)args[1];
                         case BedrockType.BedrockPrimitiveType.Float32:
                             return (float)args[0] * (float)args[1];
-                        case BedrockType.BedrockPrimitiveType.Float64:
-                            return (double)args[0] * (double)args[1];
 
                         default:
-                            throw new Exception($"Invalid generic type : {Type.GetTypeName()}");
+                            throw new Exception($"Invalid generic type : {returnType.GetTypeName()}");
                     }
                 }
             }
@@ -106,7 +94,7 @@ namespace Bedrock
             {
                 public Divide(BedrockType type)
                 {
-                    Type = type;
+                    returnType = type;
                     Name = "Divide";
                 }
 
@@ -115,21 +103,17 @@ namespace Bedrock
                     if (args.Length != 2)
                         throw new ArgumentException("Only 2 Arguments!");
 
-                    switch (Type.BedRockType)
+                    switch (returnType.BedRockType)
                     {
                         case BedrockType.BedrockPrimitiveType.UInt8:
                             return (byte)args[0] / (byte)args[1];
                         case BedrockType.BedrockPrimitiveType.Int32:
                             return (int)args[0] / (int)args[1];
-                        case BedrockType.BedrockPrimitiveType.Int64:
-                            return (long)args[0] / (long)args[1];
                         case BedrockType.BedrockPrimitiveType.Float32:
                             return (float)args[0] / (float)args[1];
-                        case BedrockType.BedrockPrimitiveType.Float64:
-                            return (double)args[0] / (double)args[1];
 
                         default:
-                            throw new Exception($"Invalid generic type : {Type.GetTypeName()}");
+                            throw new Exception($"Invalid generic type : {returnType.GetTypeName()}");
                     }
                 }
             }
@@ -138,7 +122,7 @@ namespace Bedrock
             {
                 public Modulus(BedrockType type)
                 {
-                    Type = type;
+                    returnType = type;
                     Name = "Modulus";
                 }
 
@@ -147,16 +131,14 @@ namespace Bedrock
                     if (args.Length != 2)
                         throw new ArgumentException("Only 2 Arguments!");
 
-                    switch (Type.BedRockType)
+                    switch (returnType.BedRockType)
                     {
                         case BedrockType.BedrockPrimitiveType.UInt8:
                             return (byte)args[0] % (byte)args[1];
                         case BedrockType.BedrockPrimitiveType.Int32:
                             return (int)args[0] % (int)args[1];
-                        case BedrockType.BedrockPrimitiveType.Int64:
-                            return (long)args[0] % (long)args[1];
                         default:
-                            throw new Exception($"Invalid generic type : {Type.GetTypeName()}");
+                            throw new Exception($"Invalid generic type : {returnType.GetTypeName()}");
                     }
                 }
             }

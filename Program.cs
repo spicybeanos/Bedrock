@@ -1,5 +1,7 @@
 ﻿using System.Formats.Asn1;
 using System.IO;
+using System.Collections;
+using System.Collections.Generic;
 using System.Text.Json;
 using Bedrock;
 
@@ -7,22 +9,19 @@ class Program
 {
     static void Main(string[] args)
     {
+        if(args.Length < 1){
+            Console.WriteLine("Usage: [file path]");
+            return;
+        }
+
         if (!File.Exists(args[0]))
             throw new Exception("File does not exist!");
         string text = File.ReadAllText(args[0]);
         var tokens = SourceButcher.Butcher(text);
         
-        IFunction mathfunc;
-        mathfunc = new Bedrock.SystemFunctions.Math.Add(BedrockType.Int32);
-        var result = mathfunc.ExecuteFunction(new object[] { 1, 2 });
+        var parser = new Parser(tokens);
+        var exp = parser.Parse();
         
-        //Console.WriteLine(result);
-        foreach (var t in tokens)
-        {
-            //" -> "+ t.tokenType+
-            Console.Write($"`{text.Substring(t.startIndex, t.length)}`"+" -> "+ t.tokenType+" ,");
-            if (t.tokenType == TokenType.EndStatement)
-                Console.WriteLine();
-        }
+        Console.WriteLine("value = "+new Interpreter().Evaluate(exp));
     }
 }

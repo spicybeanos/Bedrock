@@ -3,14 +3,23 @@ namespace Bedrock
     public class Token
     {
         public TokenType tokenType{get;set;}
-        public int startIndex {get;set;}
-        public int length{get;set;}
+        public object literalValue {get;set;}
+        public string lexeme {get;set;}
         public int line{get;set;}
-        public Token(TokenType tokenType,int startIndex,int line,int length=1){
+        public Token(TokenType tokenType,string lexeme,int line){
             this.tokenType = tokenType;
-            this.startIndex = startIndex;
-            this.length=length;
+            this.lexeme = lexeme;
             this.line = line;
+
+            if(tokenType == TokenType.IntegerLiteral){
+                literalValue = LiteralParser.ParseInteger(this);
+            }
+            else if(tokenType == TokenType.DecimalLiteral){
+                literalValue = double.Parse(lexeme);
+            }
+            else if(tokenType == TokenType.StringLiteral){
+                literalValue = LiteralParser.ParseString(this);
+            }
         }
     }
 }

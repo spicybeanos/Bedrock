@@ -2,53 +2,75 @@ namespace Bedrock
 {
     public class Syntax
     {
-        private readonly Dictionary<string, TokenType> m_stringToTType = new Dictionary<
-            string,
-            TokenType
-        >()
+        public static TokenType GetKeyword(string word)
         {
-            { "fxn", TokenType.Function },
-            { "byte", TokenType.Byte },
-            { "int", TokenType.Int },
-            { "long", TokenType.Long },
-            { "float", TokenType.Float },
-            { "double", TokenType.Double },
-            { "string", TokenType.String },
-            { "ushort", TokenType.UShort },
-            { "bool", TokenType.Bool },
-            { "void", TokenType.Void },
-            { "return", TokenType.Return },
-            { "true", TokenType.True },
-            { "false", TokenType.False },
-            { "null", TokenType.Null },
-            { "if", TokenType.If },
-            { "else", TokenType.Else },
-            { "while", TokenType.While },
-            { "then", TokenType.Then },
-            { "switch", TokenType.Switch },
-            { "case", TokenType.Case },
-            { "import", TokenType.Import },
-            { "ref", TokenType.Ref }
-        };
-
-        public TokenType GetKeyword(string word)
-        {
-            if (m_stringToTType.ContainsKey(word))
-                return m_stringToTType[word];
-            throw new Exception($"not a key word : [{word}]");
+            switch (word)
+            {
+                case "fxn":
+                    return TokenType.Fxn;
+                case "Fxn":
+                    return TokenType.Fxn_type;
+                case "class":
+                    return TokenType.Class;
+                case "self":
+                    return TokenType.Self;
+                case "byte":
+                    return TokenType.Byte;
+                case "short":
+                    return TokenType.Short;
+                case "int":
+                    return TokenType.Int;
+                case "float":
+                    return TokenType.Float;
+                case "string":
+                    return TokenType.String;
+                case "void":
+                    return TokenType.Void;
+                case "return":
+                    return TokenType.Return;
+                case "true":
+                    return TokenType.True;
+                case "false":
+                    return TokenType.False;
+                case "null":
+                    return TokenType.Null;
+                case "if":
+                    return TokenType.If;
+                case "for":
+                    return TokenType.For;
+                case "else":
+                    return TokenType.Else;
+                case "while":
+                    return TokenType.While;
+                case "switch":
+                    return TokenType.Switch;
+                case "case":
+                    return TokenType.Case;
+                case "import":
+                    return TokenType.Import;
+                case "ref":
+                    return TokenType.Ref;
+                case "var":
+                    return TokenType.Var;
+                default:
+                    return TokenType.Identifier;
+            }
+            //eoswitch
         }
 
+        //eofn
         public class KeywordAsString
         {
-            public const string Function = "fxn",
+            public const string Fxn = "fxn",
+                Fxn_type = "Fxn",
+                Class = "class",
+                Self = "self",
                 Byte = "byte",
+                Short = "short",
                 Int = "int",
-                UShort = "ushort",
-                Long = "long",
+                For = "for",
                 Float = "float",
-                Double = "double",
                 String = "string",
-                Bool = "bool",
                 Void = "void",
                 Return = "return",
                 True = "true",
@@ -57,12 +79,14 @@ namespace Bedrock
                 If = "if",
                 Else = "else",
                 While = "while",
-                Then = "then",
                 Switch = "switch",
                 Case = "case",
                 Import = "import",
                 Ref = "ref",
-                Unique = "unique";
+                Var = "var";
         }
+        //eoKaS
     }
+    //eosyn
 }
+//eon

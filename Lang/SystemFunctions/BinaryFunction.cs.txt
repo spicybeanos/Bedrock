@@ -7,20 +7,20 @@ namespace Bedrock
     {
         public class BinaryFunction : IGenericFunction
             {
-                public BedrockType Type;
+                public BedrockType returnType;
                 public string Name;
 
                 public virtual object ExecuteFunction(object[] args)
                 {
                     if (args.Length != 2)
-                        throw new ArgumentException("Only 2 Arguments!");
+                        throw new ArgumentException("Only 2 args allowed!");
 
                     throw new NotImplementedException();
                 }
 
                 public BedrockType GetGenericType()
                 {
-                    return Type;
+                    return returnType;
                 }
 
                 public string GetName()
@@ -35,7 +35,7 @@ namespace Bedrock
 
                 public BedrockType[] GetParamsTypes()
                 {
-                    return new BedrockType[] { Type, Type };
+                    return new BedrockType[] { returnType, returnType };
                 }
 
                 public string GetPrototypedName()
@@ -54,12 +54,12 @@ namespace Bedrock
 
                 public BedrockType GetReturnType()
                 {
-                    return Type;
+                    return returnType;
                 }
 
                 public void SetGenericType(BedrockType type)
                 {
-                    Type = type;
+                    returnType = type;
                 }
             }
     }

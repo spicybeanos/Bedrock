@@ -29,7 +29,7 @@ The following are valid types:
 
 How to declear a varible (not sure which one is best yet):
 
-x := 10;
+x : var = 10;
 x : int = 10;
 x : i32 = 10;
 x : int; //defaults to zero
@@ -38,19 +38,19 @@ const x : int = 5;
 //function references
 // they have to be assigned to a constant function later on!
 // dangling functions are not allowed! (yet)
-hello : fxn             //not allowed
-sum : fxn[int]          // allowed
-sum : fxn[int][int,int] // allowed
+hello : Fxn             // not allowed
+sum : Fxn[int]          // not allowed
+sum : Fxn[int][int,int] // allowed
 
 //immutable functions
 fxn hello (){
 	println("Hello world");
 }
-fxn [int] sum (a:int, b:int)
+fxn <int> sum (a:int, b:int)
 {
 	return a + b;
 }
-fxn <int> [int,int] sum (a:int, b:int)
+fxn <int> <int,int> sum (a:int, b:int)
 {
 	return a + b;
 }
@@ -58,7 +58,6 @@ fxn <int> [int,int] sum (a:int, b:int)
 following are arrays:
 	{1,2,4,5} (int array)
 	{1f,2f,3f,4f} (float array)
-	{1.3333,32b,2123432L,333 ,98.0000002}  (number array)
 
 following are function types:
 	fxn[int]  //int is the return type

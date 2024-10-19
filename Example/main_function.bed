@@ -1,4 +1,1 @@
-fxn main(args:string[])
-{
-    system.print("Hello world!");
-}
+1 + 6 * 2.5

@@ -2,7 +2,7 @@ namespace Bedrock
 {
     public abstract class Expression
     {
-        public abstract R Accept<R>(Visitor<R> visitor);
+        public abstract R Accept<R>(ExpressionVisitor<R> visitor);
 
         public class LiteralExpresion : Expression
         {
@@ -20,7 +20,7 @@ namespace Bedrock
                 this.type = BedrockTypeHandler.GetNativeType(val);
             }
 
-            public override R Accept<R>(Visitor<R> visitor)
+            public override R Accept<R>(ExpressionVisitor<R> visitor)
             {
                 return visitor.VisitLiteral(this);
             }
@@ -36,7 +36,7 @@ namespace Bedrock
                 expression = ex;
             }
 
-            public override R Accept<R>(Visitor<R> visitor)
+            public override R Accept<R>(ExpressionVisitor<R> visitor)
             {
                 return visitor.VisitUnary(this);
             }
@@ -57,7 +57,7 @@ namespace Bedrock
                 token = opp;
             }
 
-            public override R Accept<R>(Visitor<R> visitor)
+            public override R Accept<R>(ExpressionVisitor<R> visitor)
             {
                 return visitor.VisitBinary(this);
             }
@@ -72,7 +72,7 @@ namespace Bedrock
                 this.expression = expr;
             }
 
-            public override R Accept<R>(Visitor<R> visitor)
+            public override R Accept<R>(ExpressionVisitor<R> visitor)
             {
                 return visitor.VisitGroup(this);
             }

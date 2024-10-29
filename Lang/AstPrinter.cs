@@ -2,7 +2,7 @@ using System.Text;
 
 namespace Bedrock
 {
-    class AstPrinter : Visitor<String>
+    class AstPrinter : ExpressionVisitor<String>
     {
         public override string VisitBinary(Expression.BinaryExpression expr)
         {

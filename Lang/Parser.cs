@@ -7,6 +7,17 @@ namespace Bedrock
         private readonly List<Token> tokens;
         int current = 0;
 
+        public List<Statement> parse()
+        {
+            List<Statement> statements = new List<Statement>();
+            while (!isAtEnd())
+            {
+                statements.Add(statement());
+            }
+
+            return statements;
+        }
+
         public Expression Parse()
         {
             try
@@ -31,16 +42,16 @@ namespace Bedrock
 
         private Expression equality()
         {
-            Expression expr = comparison();
+            Expression left = comparison();
 
             while (match(TokenType.BangEquals, TokenType.EqualEquals))
             {
                 Token opp = previous();
                 Expression right = comparison();
-                expr = new Expression.BinaryExpression(expr, opp, right);
+                left = new Expression.BinaryExpression(left, opp, right);
             }
 
-            return expr;
+            return left;
         }
 
         private Expression comparison()
@@ -153,7 +164,13 @@ namespace Bedrock
                 advance();
             }
         }
-
+        
+        /// <summary>
+        /// checks if current token is equal to `type`, if it is,
+        /// advance and return true, if not return false and not advance
+        /// </summary>
+        /// <param name="types"></param>
+        /// <returns></returns>
         private bool match(params TokenType[] types)
         {
             foreach (TokenType type in types)
@@ -168,6 +185,12 @@ namespace Bedrock
             return false;
         }
 
+        /// <summary>
+        /// returns if current token is equal to `type` and if
+        /// not at end
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         private bool check(TokenType type)
         {
             if (isAtEnd())
@@ -175,12 +198,19 @@ namespace Bedrock
             return peek().tokenType == type;
         }
 
-        private Token consume(TokenType type, String message)
+        /// <summary>
+        /// checks if the next token is `type`, if it is, returns advance
+        /// else throws an exception
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="error_message"></param>
+        /// <returns></returns>
+        private Token consume(TokenType type, string error_message)
         {
             if (check(type))
                 return advance();
 
-            throw error(peek(), message);
+            throw error(peek(), error_message);
         }
 
         private BedrockError.ParseError error(Token token, String message)
@@ -189,6 +219,10 @@ namespace Bedrock
             return new BedrockError.ParseError();
         }
 
+        /// <summary>
+        /// returns the current token and then increments the pointer
+        /// </summary>
+        /// <returns></returns>
         private Token advance()
         {
             if (!isAtEnd())
@@ -196,16 +230,26 @@ namespace Bedrock
             return previous();
         }
 
+        /// <summary>
+        /// returns if the current token is EOF
+        /// </summary>
+        /// <returns></returns>
         private bool isAtEnd()
         {
             return peek().tokenType == TokenType.EOF;
         }
-
+        /// <summary>
+        /// returns the current token
+        /// </summary>
+        /// <returns></returns>
         private Token peek()
         {
             return tokens[current];
         }
-
+        /// <summary>
+        /// returns the previous token, ie `current - 1`
+        /// </summary>
+        /// <returns></returns>
         private Token previous()
         {
             return tokens[current - 1];

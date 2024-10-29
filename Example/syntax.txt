@@ -2,12 +2,18 @@
 * Manifest typed
 * Try to make everything a variable
 
+* Philosophy:
+- make it look like python, but strict and explicit types
+- conventional for loop and python for loop using `in` to hint at foreach
+
+
+
 The following are literals:
 
 	123 (<integer>)
-	0x7B (u<num>)
-	123b (byte,int/number)
-	123.12 (float/number)
+	0x7B (integer)
+	123b (integer)
+	123.12 (double)
 	"asdsadasd" (string)
 	true (bool)
 	'a' (ushort/int)
@@ -29,7 +35,7 @@ The following are valid types:
 
 How to declear a varible (not sure which one is best yet):
 
-x : var = 10;
+x : var = 10; // at compile time becomes Int32
 x : int = 10;
 x : i32 = 10;
 x : int; //defaults to zero

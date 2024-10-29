@@ -1,6 +1,6 @@
 namespace Bedrock
 {
-    public class Interpreter : Visitor<object>
+    public class Interpreter : ExpressionVisitor<object>
     {
         public override object VisitBinary(Expression.BinaryExpression expr)
         {
@@ -9,8 +9,8 @@ namespace Bedrock
             var t1 = BedrockTypeHandler.GetNativeType(left);
             var t2 = BedrockTypeHandler.GetNativeType(right);
             var ht = BedrockTypeHandler.GetHigherType(left, right);
-            Number l = new Number(left);
-            Number r = new Number(right);
+            Number leftNumber = new Number(left);
+            Number rightNumber = new Number(right);
 
             switch (expr.Operator)
             {
@@ -27,21 +27,21 @@ namespace Bedrock
                             switch (expr.Operator)
                             {
                                 case TokenType.Minus:
-                                    return (l - r).value;
+                                    return (leftNumber - rightNumber).value;
                                 case TokenType.Plus:
-                                    return (l + r).value;
+                                    return (leftNumber + rightNumber).value;
                                 case TokenType.Slash:
-                                    return (l / r).value;
+                                    return (leftNumber / rightNumber).value;
                                 case TokenType.Star:
-                                    return (l * r).value;
+                                    return (leftNumber * rightNumber).value;
                                 case TokenType.GreaterEquals:
-                                    return l >= r;
+                                    return leftNumber >= rightNumber;
                                 case TokenType.RightAngle_Greater:
-                                    return l > r;
+                                    return leftNumber > rightNumber;
                                 case TokenType.LesserEquals:
-                                    return l <= r;
+                                    return leftNumber <= rightNumber;
                                 case TokenType.LeftAngle_Lesser:
-                                    return l < r;
+                                    return leftNumber < rightNumber;
                                 //unreachable
                                 default:
                                     return null;

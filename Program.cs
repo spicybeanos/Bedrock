@@ -13,9 +13,13 @@ class Program
             Console.WriteLine("Usage: [file path]");
             return;
         }
-
+        GenerateAst.main(args);
+        
         if (!File.Exists(args[0]))
             throw new Exception("File does not exist!");
+        
+        
+        /*
         string text = File.ReadAllText(args[0]);
         var tokens = SourceButcher.Butcher(text);
         
@@ -23,5 +27,6 @@ class Program
         var exp = parser.Parse();
         
         Console.WriteLine("value = "+new Interpreter().Evaluate(exp));
+        */
     }
 }

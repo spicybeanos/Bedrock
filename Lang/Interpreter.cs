@@ -1,8 +1,8 @@
 namespace Bedrock
 {
-    public class Interpreter : ExpressionVisitor<object>
+    public class Interpreter : ExpressionVisitor<object>, StatementVisitor<int>
     {
-        public override object VisitBinary(Expression.BinaryExpression expr)
+        public object VisitBinary(Expression.BinaryExpression expr)
         {
             object left = Evaluate(expr.Left);
             object right = Evaluate(expr.Right);
@@ -89,17 +89,17 @@ namespace Bedrock
             return a.Equals(b);
         }
 
-        public override object VisitGroup(Expression.GroupingExpression expr)
+        public object VisitGroup(Expression.GroupingExpression expr)
         {
             return Evaluate(expr.expression);
         }
 
-        public override object VisitLiteral(Expression.LiteralExpresion expr)
+        public object VisitLiteral(Expression.LiteralExpresion expr)
         {
             return expr.Value;
         }
 
-        public override object VisitUnary(Expression.UnaryExpression expr)
+        public object VisitUnary(Expression.UnaryExpression expr)
         {
             object right = Evaluate(expr.expression);
 
@@ -127,6 +127,34 @@ namespace Bedrock
         public object Evaluate(Expression expr)
         {
             return expr.Accept(this);
+        }
+
+        public void Interpret(List<Statement> statements){
+            try{
+                foreach (var stmt  in statements)
+                {
+                    Execute(stmt);
+                }
+            }catch(Exception ex){
+                
+            }
+        }
+
+        public void Execute(Statement statement){
+            statement.Accept(this);
+        }
+
+        int StatementVisitor<int>.VisitExpressionStatement(Statement.StatementExpression expr)
+        {
+            Evaluate(expr.expression);
+            return 0;
+        }
+
+        int StatementVisitor<int>.VisitPrintStatement(Statement.Print expr)
+        {
+            object val = Evaluate(expr.expression);
+            Console.WriteLine(val);
+            return 0;
         }
     }
 }

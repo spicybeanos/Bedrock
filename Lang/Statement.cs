@@ -2,16 +2,16 @@ namespace Bedrock
 {
     public abstract class Statement
     {
-        public class Expression : Statement
+        public class StatementExpression : Statement
         {
-            public Expression(Expression expression)
+            public StatementExpression(Expression expression)
             {
                 this.expression = expression;
             }
 
-            readonly Expression expression;
+            public readonly Expression expression;
 
-            public override R Accept<R>(Visitor<R> visitor)
+            public override R Accept<R>(StatementVisitor<R> visitor)
             {
                 return visitor.VisitExpressionStatement(this);
             }
@@ -24,14 +24,14 @@ namespace Bedrock
                 this.expression = expression;
             }
 
-            readonly Expression expression;
+            public readonly Expression expression;
 
-            public override R Accept<R>(Visitor<R> visitor)
+            public override R Accept<R>(StatementVisitor<R> visitor)
             {
                 return visitor.VisitPrintStatement(this);
             }
         }
 
-        public abstract R Accept<R>(Visitor<R> visitor);
+        public abstract R Accept<R>(StatementVisitor<R> visitor);
     }
 }

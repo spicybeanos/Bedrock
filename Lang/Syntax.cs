@@ -2,10 +2,11 @@ namespace Bedrock
 {
     public class Syntax
     {
-        public static TokenType GetKeyword(string word)
+        public static TokenType GetKeywordOrIdentifier(string word)
         {
             switch (word)
             {
+                case "print": return TokenType.Print;
                 case "fxn":
                     return TokenType.Fxn;
                 case "Fxn":
@@ -62,6 +63,7 @@ namespace Bedrock
         public class KeywordAsString
         {
             public const string Fxn = "fxn",
+                Print = "print",
                 Fxn_type = "Fxn",
                 Class = "class",
                 Self = "self",

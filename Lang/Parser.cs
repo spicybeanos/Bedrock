@@ -12,10 +12,31 @@ namespace Bedrock
             List<Statement> statements = new List<Statement>();
             while (!isAtEnd())
             {
-                statements.Add(statement());
+                statements.Add(Statement());
             }
 
             return statements;
+        }
+
+        private Statement Statement()
+        {
+            if (match(TokenType.Print)) return PrintStatement();
+
+            return ExpressionStatement();
+        }
+
+        private Statement ExpressionStatement()
+        {
+            Expression value = expression();
+            consume(TokenType.EndStatement, "Expect ';' after value.");
+            return new Statement.StatementExpression(value);
+        }
+
+        private Statement PrintStatement()
+        {
+            Expression value = expression();
+            consume(TokenType.EndStatement, "Expect ';' after value.");
+            return new Statement.Print(value);
         }
 
         public Expression Parse()
@@ -164,7 +185,7 @@ namespace Bedrock
                 advance();
             }
         }
-        
+
         /// <summary>
         /// checks if current token is equal to `type`, if it is,
         /// advance and return true, if not return false and not advance

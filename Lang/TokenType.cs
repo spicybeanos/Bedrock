@@ -50,7 +50,7 @@ namespace Bedrock
         Ampersand,Pipe,Carrot,
 
         //key words
-        Fxn,Fxn_type,
+        Fxn,Fxn_type,Print,
         Class,Self,
         Byte,Short,Int,Float,String,Void,
         Return,True,False,Null,

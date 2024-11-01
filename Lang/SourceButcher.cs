@@ -354,7 +354,7 @@ namespace Bedrock
                                 )
                                     ;
                                 string word_ = text.Substring(start, length);
-                                var tt = Syntax.GetKeyword(word_);
+                                var tt = Syntax.GetKeywordOrIdentifier(word_);
                                 tokens.Add(new Token(tt, text.Substring(start,length), line));
                                 current--;
                             }
